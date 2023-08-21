@@ -48,7 +48,7 @@ public class DiverController : MonoBehaviour
 		Vector2 targetDir = inputAxis;
 		// Vector2 targetDir = (-Vector2.Perpendicular(aimDir)*inputAxis.x + aimDir*inputAxis.y).normalized;
 		float allignment = (Vector2.Dot(facingDir,targetDir) + 1) / 2;
-		float transformedAllignment = Mathf.Clamp01(TransformRange(allignment,speedSwitchStartThreshold,speedSwitchEndThreshold,0,1));
+		float transformedAllignment = Mathf.Clamp01(MathUtils.TransformRange(allignment,speedSwitchStartThreshold,speedSwitchEndThreshold,0,1));
 		float movementSpeed = Mathf.Lerp(slowSpeed, fastSpeed, transformedAllignment);
 		rb.velocity = Vector2.Lerp(rb.velocity, targetDir*movementSpeed, Time.deltaTime*linearAcceleration);
 
@@ -58,8 +58,5 @@ public class DiverController : MonoBehaviour
 	}
 	Vector2 GetAxis(){
 		return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
-	}
-	float TransformRange(float value, float min, float max, float newMin, float newMax){
-		return ( (value - min) / (max - min) ) * (newMax - newMin) + newMin;
 	}
 }
