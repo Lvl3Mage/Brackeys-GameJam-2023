@@ -9,10 +9,12 @@ public class HingeOscilator : MonoBehaviour
 	[SerializeField] float strength;
 	[SerializeField] float period;
 	[SerializeField] bool initialState;
+	[SerializeField] [Range(0,1)] float cycleOffset;
 	[HideInInspector] public float timeScale = 1;
 	void Start()
 	{
 		highFase = initialState;
+		accumulatedTime = cycleOffset*period*0.5f;
 	}
 
 	float accumulatedTime = 0;
