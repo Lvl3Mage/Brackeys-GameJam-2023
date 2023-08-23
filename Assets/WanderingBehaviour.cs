@@ -43,7 +43,7 @@ public class WanderingBehaviour : FishBehaviour
 	void Start(){
 		SelectNewTarget();
 	}
-	public override float GetScore(){
+	public override float GetPreferenceValue(){
 		return behaviourStrength;
 	}
 	float targetSpawnTime;
@@ -56,10 +56,6 @@ public class WanderingBehaviour : FishBehaviour
 			SelectNewTarget();
 		}
 		TravelToTarget();
-
-
-
-		
 
 	}
 	void TravelToTarget(){

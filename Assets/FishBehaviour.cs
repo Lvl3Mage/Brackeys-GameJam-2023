@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class FishBehaviour : MonoBehaviour
 {
-	public abstract float GetScore();
+	public abstract float GetPreferenceValue();
 	public abstract void UpdateBehaviour();
 }
