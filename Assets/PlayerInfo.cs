@@ -14,8 +14,8 @@ public class PlayerInfo : MonoBehaviour
 		Vector2 acceleration;
 		public void ComputeChanges(){
 			pastVelocity = velocity;
-			velocity = (Vector2)part.position - pastPosition;
-			acceleration = velocity - pastVelocity;
+			velocity = ((Vector2)part.position - pastPosition)/Time.deltaTime;
+			acceleration = (velocity - pastVelocity)/Time.deltaTime;
 			pastPosition = part.position;
 		}
 		public Vector2 GetVelocity(){

@@ -1,25 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MyBox;
 public class FearBehaviour : FishBehaviour
 {
-	[Header("Fear Settings")]
-	[SerializeField] float fearAccelerationMaxInfluence;
-	[SerializeField] float fearAccelerationActivationPoint;
-	[SerializeField] float fearAccelerationActivationPower;
-	[SerializeField] float fearAccelerationHalfStrengthDistance;
-	[Space]
-	[SerializeField] float fearApproachInfluence;
-	[Space]
-	[SerializeField] float fearProximityInfluenceMax;
-	[SerializeField] float fearProximityInfluenceHalfDistance;
-	[Space]
+
+	[Foldout("Misc Fear Settings",true)] 
 	[SerializeField] float fearDecaySpeed = 1;
 	[SerializeField] float fearMinValue = 0;
 	[SerializeField] float fearMaxValue = 2;
-	[SerializeField] [Range(0,1)] float fearActiveBonus;
+	[SerializeField] float fearActiveBonus;
 	[SerializeField] float preferenceMultiplier = 1;
+	[Foldout("Surprise Fear Settings",true)] 
+	[SerializeField] bool enableSurpriseFear;
+	[ConditionalField(nameof(enableSurpriseFear))] [SerializeField] float surpriseFearMaxStrength;
+	[ConditionalField(nameof(enableSurpriseFear))] [SerializeField] float surpriseFearHalfStrengthDistance;
+	[ConditionalField(nameof(enableSurpriseFear))] [SerializeField] float surpriseFearActivationVelocity;
+	[ConditionalField(nameof(enableSurpriseFear))] [SerializeField] float surpriseFearActivationSteepness;
+	[Space]
+
+	[Foldout("Approach Fear Settings",true)] 
+	[SerializeField] bool enableApproachFear;
+	[ConditionalField(nameof(enableApproachFear))] [SerializeField] float approachFearStrength;
+	[ConditionalField(nameof(enableApproachFear))] [SerializeField] float approachFearHalfStrengthDistance;
+	[Space]
+
+	[Foldout("Proximity Fear Settings")]
+	[SerializeField] bool enableProximityFear;
+	[Foldout("Proximity Fear Settings")]
+	[ConditionalField(nameof(enableProximityFear))] [SerializeField] float proximityFearMaxStrength;
+	[Foldout("Proximity Fear Settings")]
+	[ConditionalField(nameof(enableProximityFear))] [SerializeField] float proximityFearMinStrength;
+	[Foldout("Proximity Fear Settings")]
+	[ConditionalField(nameof(enableProximityFear))] [SerializeField] float proximityFearHalfStrengthDistance;
+
+
+	[ReadOnly] [SerializeField] float fearLevel = 0;
+	
+	[Space]
 	[Header("Movement Settings")]
 	[SerializeField] float angularSpeed = 800;
 	[SerializeField] float maxAngularSpeed = 300;
@@ -36,39 +54,48 @@ public class FearBehaviour : FishBehaviour
 	[SerializeField] [Range(0,2)] float obstacleRepulsion;
 	[Header("References")]
 	[SerializeField] Rigidbody2D rb;
-	float fearLevel;
 	void Start(){
 	}
 	void Update(){
 		Vector2 playerDelta = (Vector2)transform.position - PlayerInfo.GetPlayerPosition();
-		fearLevel += Vector2.Dot(PlayerInfo.GetAverageVelocityVector(),playerDelta.normalized)*fearApproachInfluence;
-		fearLevel += (fearProximityInfluenceMax/(playerDelta.magnitude * 1/fearProximityInfluenceHalfDistance + 1)) * Time.deltaTime;
 
-		
-		ApplyAcceleration();
+		if(enableProximityFear){
+			ApplyProximityFear(playerDelta);
+		}
+		if(enableApproachFear){
+			ApplyApproachFear(playerDelta);
+		}
+		if(enableSurpriseFear){
+			ApplySurpriseFear(playerDelta);
+		}
 
 		fearLevel -= fearDecaySpeed*Time.deltaTime;
-		fearLevel = Mathf.Max(fearLevel,fearMinValue);
-		fearLevel = Mathf.Min(fearLevel,fearMaxValue);
+		fearLevel = Mathf.Clamp(fearLevel,fearMinValue,fearMaxValue);
 		// Debug.Log(fearLevel);
 	}
-	void ApplyAcceleration(){
+	void ApplyProximityFear(Vector2 playerDelta){
+		fearLevel += MathUtils.ValueDecay(playerDelta.magnitude,proximityFearMaxStrength,proximityFearMinStrength,proximityFearHalfStrengthDistance) * Time.deltaTime;
+	}
+	void ApplyApproachFear(Vector2 playerDelta){
+		float approachFactor = Vector2.Dot(PlayerInfo.GetAverageVelocityVector(),playerDelta.normalized); //vel to -vel
+		float distanceFactor = MathUtils.ValueDecay(playerDelta.magnitude,1,0,approachFearHalfStrengthDistance);//1-0
+		fearLevel += approachFactor*distanceFactor*approachFearStrength*Time.deltaTime;
+	}
+	void ApplySurpriseFear(Vector2 playerDelta){
 		float acceleration = PlayerInfo.GetMaxVelocityMagnitude();
 		// Debug.Log(acceleration);
-		float activationValue = acceleration / (fearAccelerationActivationPoint*2);
+		float activationValue = acceleration / (surpriseFearActivationVelocity*2);
+		if(surpriseFearActivationVelocity == 0){//NAN Checking
+			activationValue = 1;
+		}
 		activationValue = Mathf.Clamp01(activationValue);
-		float power = fearAccelerationActivationPower*2*fearAccelerationActivationPoint;
+		float power = surpriseFearActivationSteepness*2*surpriseFearActivationVelocity;
 		float activationValueElevated = Mathf.Pow(activationValue, power);
 
-		float computedValue = (activationValueElevated/(activationValueElevated+Mathf.Pow(1-activationValue,power)))*fearAccelerationMaxInfluence;
-		// if(acceleration > fearAccelerationActivationPoint){
-		// 	Debug.Log(fearLevel + " : " + computedValue);
+		float surpriseFactor = (activationValueElevated/(activationValueElevated+Mathf.Pow(1-activationValue,power)))*surpriseFearMaxStrength;
 
-		// }
-		Vector2 playerDelta = (Vector2)transform.position - PlayerInfo.GetPlayerPosition();
-
-		float distanceMultiplier = 1/(playerDelta.magnitude*(1/fearProximityInfluenceHalfDistance)+1);
-		fearLevel += computedValue*distanceMultiplier;
+		float distanceFactor = 1/(playerDelta.magnitude*(1/surpriseFearHalfStrengthDistance)+1);
+		fearLevel += surpriseFactor*distanceFactor*Time.deltaTime;
 	}
 	public override float GetPreferenceValue(){
 		return fearLevel*preferenceMultiplier;
