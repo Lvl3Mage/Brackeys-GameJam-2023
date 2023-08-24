@@ -3324,6 +3324,7 @@ GameObject:
   - component: {fileID: 439667167461406101}
   - component: {fileID: 9142815641740597273}
   - component: {fileID: 8795225354764969173}
+  - component: {fileID: 3576990244711583048}
   m_Layer: 6
   m_Name: HUD
   m_TagString: Untagged
@@ -3412,6 +3413,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!70 &3576990244711583048
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508913005920679087}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.15}
+  m_Size: {x: 0.8, y: 0.22}
+  m_Direction: 1
 --- !u!1 &2845982995856476215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3640,6 +3657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1847890548919905076}
   - component: {fileID: 8399761670035180097}
+  - component: {fileID: 356010608020530637}
   m_Layer: 6
   m_Name: OxyTank
   m_TagString: Untagged
@@ -3676,6 +3694,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4490127097146130531}
   m_CullTransparentMesh: 1
+--- !u!114 &356010608020530637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490127097146130531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82c72786be201d4589be2eeeb6b2e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 122207922706165702}
 --- !u!1 &7881367392711507818
 GameObject:
   m_ObjectHideFlags: 0
