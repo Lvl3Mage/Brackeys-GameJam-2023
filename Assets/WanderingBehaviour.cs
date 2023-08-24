@@ -2,8 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class NoiseSampler
+{
+	[SerializeField] float noiseScale;
+	[SerializeField] Vector2 scrollSpeed;
+	[SerializeField] Vector2 seed;
+	[SerializeField] float minValue;
+	[SerializeField] float maxValue;
+	public float SampleAt(Vector2 position){
+		Vector2 noiseCoords = position/noiseScale + scrollSpeed*Time.time +seed;
+		float val = MathUtils.TransformRange(Mathf.PerlinNoise(noiseCoords.x, noiseCoords.y),0,1,minValue,maxValue);
+		return val;
+	}
+}
 public class WanderingBehaviour : FishBehaviour
 {
+	
 	[SerializeField] Rigidbody2D rb;
 	[SerializeField] float behaviourStrength;
 
@@ -29,17 +44,22 @@ public class WanderingBehaviour : FishBehaviour
 	[SerializeField] float targetMinObstacleDistance;
 	[SerializeField] float targetMaxLifetime;
 
+	// [Header("Fish Attraction settings")]
+	// [SerializeField] float attractionRadius;
+	// [SerializeField]
+	[Header("Target Selection Settings")]
+	[SerializeField] NoiseSampler targetSelectionNoiseX;
+	[SerializeField] NoiseSampler targetSelectionNoiseY;
+	// [SerializeField] int targetSamples = 10;
+
 	[Header("Rotation Noise Settings")]
-	[SerializeField] float noiseMagnitude;
-	[SerializeField] float noiseScale;
-	[SerializeField] float scrollSpeed;
+	[SerializeField] NoiseSampler rotationNoise;
 
 	[Header("Collision Avoidance settings")]
 	[SerializeField] float scanAngleStepSize; 
 	[SerializeField] float maxScanAngle;
 	[SerializeField] float scanDistance;
 	[SerializeField] [Range(0,2)] float obstacleRepulsion;
-
 	void Start(){
 		SelectNewTarget();
 	}
@@ -68,8 +88,7 @@ public class WanderingBehaviour : FishBehaviour
 
 
 		//Noise
-		Vector2 noiseCoords = (Vector2)transform.position/noiseScale;
-		float rotationOffset = (Mathf.PerlinNoise(noiseCoords.x + Time.time*scrollSpeed, noiseCoords.y + Time.time*scrollSpeed)*2 - 1) * noiseMagnitude;
+		float rotationOffset = rotationNoise.SampleAt(transform.position);
 
 		targetAngle += rotationOffset;
 
@@ -114,29 +133,51 @@ public class WanderingBehaviour : FishBehaviour
 		return hit.collider != null;
 	}
 	void SelectNewTarget(){
-		Vector2 point = GenerateTarget();
+		// float minSample = Mathf.Infinity;
+		// for(int i = 0; i < targetSamples; i++){
+		// 	Vector2 newTarget = GenerateValidTarget();
+		// 	float sampleValue = targetSelectionNoise.SampleAt(newTarget);
+		// 	if(minSample > sampleValue){
+		// 		target = newTarget;
+		// 		targetSpawnTime = Time.time;
+		// 		minSample = sampleValue;
+		// 	}
+		// }
+		target = GenerateValidTarget();
+		targetSpawnTime = Time.time;
+
+	}
+	Vector2 GenerateValidTarget(){
 		int iter = 0;
+		float minValue = Mathf.Infinity;
+		Vector2 point = GenerateTargetPerlin();
 		while(true){
 			Vector2 pointDelta = point-(Vector2)transform.position;
 			if(!ScanObstaclesInDirection(pointDelta, pointDelta.magnitude, pathBlockingLayers)){//not blocked
 				Collider2D col = Physics2D.OverlapCircle(point, targetMinObstacleDistance, pathBlockingLayers);
 				if(col == null){
-					break;
+					return point;
 				}
 			}
-			point = GenerateTarget();
+			point = GenerateTargetRandom();
 			iter++;
 			if(iter > 1000){
-				Debug.LogWarning("Iteration count exceeded maximum!");
-				break;
+				Debug.LogWarning("Target search iteration count exceeded maximum!");
+				return point;
 			}
 		}
-		targetSpawnTime = Time.time;
-		target = point;
-
 	}
-	Vector2 GenerateTarget(){
+	Vector2 GenerateTargetRandom(){
 		Vector2 randPoint = Random.insideUnitCircle;
+		if(randPoint.sqrMagnitude == 0.0){
+			randPoint = Vector2.up;
+		}
+		randPoint = randPoint.normalized;
+		randPoint *= Random.Range(minTargetSelectionRange,maxTargetSelectionRange);
+		return (Vector2)transform.position + randPoint;
+	}
+	Vector2 GenerateTargetPerlin(){
+		Vector2 randPoint = new Vector2(targetSelectionNoiseX.SampleAt(transform.position), targetSelectionNoiseY.SampleAt(transform.position));//Random.insideUnitCircle;
 		if(randPoint.sqrMagnitude == 0.0){
 			randPoint = Vector2.up;
 		}

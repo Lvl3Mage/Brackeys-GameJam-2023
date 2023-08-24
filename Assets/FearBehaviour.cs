@@ -46,6 +46,7 @@ public class FearBehaviour : FishBehaviour
 	[SerializeField] float linearSpeed = 8;
 	[SerializeField] float linearAcceleration = 10;
 	[SerializeField] float trajectorySharpness = 1.5f;
+	[SerializeField] NoiseSampler movementNoise;
 	[Header("Collision Avoidance Settings")]
 	[SerializeField] LayerMask pathBlockingLayers;
 	[SerializeField] float scanAngleStepSize; 
@@ -111,6 +112,7 @@ public class FearBehaviour : FishBehaviour
 		Vector2 facingDir = transform.right;
 		float facingAngle = Mathf.Atan2(facingDir.x,facingDir.y)*Mathf.Rad2Deg;
 
+		targetAngle += movementNoise.SampleAt(transform.position);
 
 		//Collision avoidance
 		targetAngle = ScanValidAngle(targetAngle);
