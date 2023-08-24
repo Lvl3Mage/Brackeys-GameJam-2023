@@ -18,7 +18,7 @@ public class HandController : MonoBehaviour
 	{
 		Vector2 cursorPos = WorldCamera.GetWorldMousePos();
 		Vector2 cursorDelta = cursorPos - (Vector2)transform.position;
-		rb.AddForceAtPosition(cursorDelta.normalized*force*Time.deltaTime, transform.position + transform.forward*0.5f, ForceMode2D.Impulse);
+		rb.AddForceAtPosition(cursorDelta.normalized*force*Time.deltaTime, transform.position - transform.right*0.5f, ForceMode2D.Impulse);
 		bodyRB.AddForce(-cursorDelta.normalized*force*Time.deltaTime, ForceMode2D.Impulse);
 	}
 }
