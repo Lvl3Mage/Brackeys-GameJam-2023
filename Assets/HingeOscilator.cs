@@ -1,33 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MyBox;
 public class HingeOscilator : MonoBehaviour
 {
 
 	[SerializeField] HingeJoint2D joint;
 	[SerializeField] float strength;
+	[SerializeField] float slowdownAngle;
 	[SerializeField] float period;
 	[SerializeField] bool initialState;
+	[SerializeField] Vector2 angleRange;
 	[SerializeField] [Range(0,1)] float cycleOffset;
 	[HideInInspector] public float timeScale = 1;
+	[SerializeField] float restingPose;
+	[SerializeField] float restingApproachStrength;
+	[SerializeField] bool debug;
 	void Start()
 	{
-		highFase = initialState;
-		accumulatedTime = cycleOffset*period*0.5f;
+		directionPositive = initialState;
+		faseTime = cycleOffset*period*0.5f;
 	}
 
-	float accumulatedTime = 0;
-	bool highFase;
+	float faseTime = 0;
+	bool directionPositive;
 	void Update()
 	{
-		accumulatedTime += Time.deltaTime*timeScale;
-		if(accumulatedTime > period*0.5){
-			accumulatedTime = 0;
-			highFase = !highFase;
+
+		faseTime += Time.deltaTime*timeScale*(directionPositive ? 1 : -1);
+		if(faseTime > period*0.5f){
+			directionPositive = false;
+			faseTime = period - faseTime;
 		}
+		else if(faseTime < 0){
+			directionPositive = true;
+			faseTime = -faseTime;
+		}
+
+		float targetAngle = Mathf.Lerp(angleRange.x, angleRange.y, faseTime/(period*0.5f));
+		float currentStrength = strength;
+		if(timeScale < 0.01f){
+			targetAngle = restingPose;
+			currentStrength = restingApproachStrength;
+		}
+		float deltaAngle = Mathf.DeltaAngle(joint.jointAngle,-targetAngle);
+		float angleFactor = Mathf.Clamp(deltaAngle/slowdownAngle,-1,1);
 		JointMotor2D motor = joint.motor;
-		motor.motorSpeed = strength*timeScale*(highFase ? 1 : -1);
+		motor.motorSpeed = Mathf.LerpUnclamped(0,currentStrength,angleFactor);
 		joint.motor = motor;
+		if(debug){
+			Debug.Log($"jointAngle: {joint.jointAngle}, targetAngle: {targetAngle}");
+		}
 	}
 }
