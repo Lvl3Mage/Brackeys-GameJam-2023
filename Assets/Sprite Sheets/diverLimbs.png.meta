@@ -1,7 +1,13 @@
 fileFormatVersion: 2
 guid: 3a7e0bb37eff7034eb0a97483e0d6022
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -5241532693954789410
+    second: oxyTankMask
+  - first:
+      213: -2024180906091565605
+    second: oxyTankOutline
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -421,12 +427,12 @@ TextureImporter:
       name: oxyTank
       rect:
         serializedVersion: 2
-        x: 50
-        y: 119
+        x: 49
+        y: 120
         width: 226
         height: 80
       alignment: 9
-      pivot: {x: 0.44546956, y: 0.19923821}
+      pivot: {x: 0.44546956, y: 0.1992382}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -434,6 +440,48 @@ TextureImporter:
       bones: []
       spriteID: 48f69e33449cb6c80800000000000000
       internalID: -8328341791125704828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oxyTankMask
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 27
+        width: 226
+        height: 80
+      alignment: 9
+      pivot: {x: 0.44712925, y: 0.1992382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edf7a3229c55247b0800000000000000
+      internalID: -5241532693954789410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: oxyTankOutline
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 120
+        width: 226
+        height: 80
+      alignment: 9
+      pivot: {x: 0.4527889, y: 0.1992382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdda843c03aa8e3e0800000000000000
+      internalID: -2024180906091565605
       vertices: []
       indices: 
       edges: []
