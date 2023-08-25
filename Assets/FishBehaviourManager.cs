@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MyBox;
 public class FishBehaviourManager : MonoBehaviour
 {
-	[SerializeField] FishBehaviour[] behaviors;
+	[AutoProperty(AutoPropertyMode.Children)] [SerializeField] FishBehaviour[] behaviors;
 	void Start()
 	{
-		
 	}
 
 
