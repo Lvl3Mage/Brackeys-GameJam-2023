@@ -290,7 +290,7 @@ MonoBehaviour:
   trajectorySharpness: 2
   pathBlockingLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 257
   targetMinObstacleDistance: 0.5
   targetMaxLifetime: 10
   targetSelectionNoiseX:
@@ -359,7 +359,7 @@ MonoBehaviour:
     maxValue: 60
   pathBlockingLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 321
   scanAngleStepSize: 5
   maxScanAngle: 180
   scanDistance: 6
@@ -409,7 +409,7 @@ MonoBehaviour:
     maxValue: 60
   pathBlockingLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 321
   scanAngleStepSize: 5
   maxScanAngle: 180
   scanDistance: 6
