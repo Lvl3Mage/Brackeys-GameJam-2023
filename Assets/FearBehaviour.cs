@@ -83,18 +83,20 @@ public class FearBehaviour : FishBehaviour
 		fearLevel += approachFactor*distanceFactor*approachFearStrength*Time.deltaTime;
 	}
 	void ApplySurpriseFear(Vector2 playerDelta){
-		float acceleration = PlayerInfo.GetMaxVelocityMagnitude();
-		// Debug.Log(acceleration);
-		float activationValue = acceleration / (surpriseFearActivationVelocity*2);
+		float maxVel = PlayerInfo.GetMaxVelocityMagnitude();
+		// Debug.Log(maxVel);
+		float activationValue = maxVel / (surpriseFearActivationVelocity*2);
 		if(surpriseFearActivationVelocity == 0){//NAN Checking
 			activationValue = 1;
 		}
 		activationValue = Mathf.Clamp01(activationValue);
-		float power = surpriseFearActivationSteepness*2*surpriseFearActivationVelocity;
+		float power = surpriseFearActivationSteepness;
 		float activationValueElevated = Mathf.Pow(activationValue, power);
 
 		float surpriseFactor = (activationValueElevated/(activationValueElevated+Mathf.Pow(1-activationValue,power)))*surpriseFearMaxStrength;
-
+		if(surpriseFactor != surpriseFactor){
+			Debug.LogError($"SurpriseFactor was NaN! activationValue: {activationValue}, activationValueElevated: {activationValueElevated}");
+		}
 		float distanceFactor = 1/(playerDelta.magnitude*(1/surpriseFearHalfStrengthDistance)+1);
 		fearLevel += surpriseFactor*distanceFactor*Time.deltaTime;
 	}

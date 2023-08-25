@@ -2,66 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class FishSpawnGroup
-{
-	[SerializeField] Transform fishPrefab;
-	[SerializeField] int minCount;
-	[SerializeField] int maxCount;
-	[SerializeField] float maxSpawnDistance;
-	[SerializeField] float minCameraDistance;
-	[SerializeField] LayerMask obstacleMask;
-	public bool isValidPosition(Vector2 position){
-		Camera cam = WorldCamera.GetCamera();
-
-		Vector2 camPos = (Vector2)cam.transform.position;
-		Vector2 camSize = new Vector2(cam.orthographicSize*2, cam.orthographicSize*2*cam.aspect);
-		float camRectDistance = RectangleSDF(position, camSize, camPos);
-		bool outsideCamera = camRectDistance > minCameraDistance;
-
-		Collider2D col = Physics2D.OverlapCircle(position, maxSpawnDistance, obstacleMask);
-		bool outsideObstacles = col == null;
-		return outsideObstacles && outsideCamera;
-	}
-	public Transform[] SpawnGroup(Vector2 position){
-		int fishToSpawn = Random.Range(minCount, maxCount);
-		Quaternion orientation = Quaternion.Euler(0, 0, Random.Range(0f,360f));
-		List<Transform> spawnedFish = new List<Transform>();
-		for(int i = 0; i <= fishToSpawn; i++){
-			spawnedFish.Add(SpawnFish(position+GetRandomSpawnPosition(), orientation));
-		}
-		return spawnedFish.ToArray();
-	}
-	Transform SpawnFish(Vector2 position, Quaternion orientation){
-		return GameObject.Instantiate(fishPrefab, position, orientation);
-	}
-	float RectangleSDF(Vector2 point, Vector2 rectSize, Vector2 rectPosition){
-		point -= rectPosition;
-	    Vector2 CWED = new Vector2(Mathf.Abs(point.x), Mathf.Abs(point.y)) - rectSize;
-	    float outsideDistance = new Vector2(Mathf.Max(CWED.x,0),Mathf.Max(CWED.y,0)).magnitude;
-	    float insideDistance = Mathf.Min(Mathf.Max(CWED.x, CWED.y), 0);
-	    return outsideDistance + insideDistance;
-	}
-	Vector2 GetRandomSpawnPosition(){
-		Vector2 randPoint = Random.insideUnitCircle;
-		if(randPoint.sqrMagnitude == 0.0f){
-			randPoint = Vector2.up;
-		}
-		randPoint = randPoint.normalized;
-		randPoint *= Random.Range(0,maxSpawnDistance);
-		return randPoint;
-	}	
-}
-
 public class FishSpawnManager : MonoBehaviour
 {
 
-	[SerializeField] FishSpawnGroup[] fishGroups;
+	[SerializeField] SpawnRegion[] spawnRegions;
 	[SerializeField] float maxSpawnDistance;
 	[SerializeField] float minSpawnDistance;
 
 	[SerializeField] float unloadDistance;
 	[SerializeField] int desiredFishAmount;
+	[SerializeField] PopulationPoint[] populationPoints;
+	[SerializeField] float populationInterpolationSmoothness;
+	[SerializeField] int hardPopulationCap;
 	List<Transform> spawnedFish = new List<Transform>();
 
 
@@ -73,25 +25,45 @@ public class FishSpawnManager : MonoBehaviour
 
 	void Update()
 	{
+		float population = Mathf.Min(GetPopulationAtPosition(GetSpawnCenter()),hardPopulationCap);
+		
 		UnloadFish();
-		if(spawnedFish.Count < desiredFishAmount){
+		if(spawnedFish.Count < population){
 			SpawnFish();
 		}
 	}
+	float GetPopulationAtPosition(Vector2 position){
+		float totalWeight = 0;
+		float[] weights = new float[populationPoints.Length];
+		for(int i=0;i<populationPoints.Length;i++){
+			PopulationPoint point = populationPoints[i];
+			float distance = (position - (Vector2)point.transform.position).magnitude;
+			if(distance < 0.01f){
+				return point.population;
+			}
+			float weight = 1/Mathf.Pow(distance,populationInterpolationSmoothness);
+			weights[i] = weight;
+			totalWeight += weight;
+			
+		}
+		float population = 0;
+		for(int i=0; i < populationPoints.Length; i++){
+			population += (weights[i]/totalWeight)*populationPoints[i].population;
+		}
+		return population;
+	}
 	void SpawnFish(){
-
-		FishSpawnGroup fishGroup = GetFishGroupAt(PlayerInfo.GetPlayerPosition());
-		Vector2 spawnPos = GetValidSpawnPosition(fishGroup);
-		Transform[] groupFish = fishGroup.SpawnGroup(spawnPos);
+		(Vector2,SpawnGroup) spawn = GetValidSpawn();
+		if(spawn.Item2 == null){//No valid positions found
+			return;
+		}
+		Transform[] groupFish = spawn.Item2.SpawnAt(spawn.Item1);
 		foreach(Transform fish in groupFish){
 			spawnedFish.Add(fish);
 		}
 	}
-	FishSpawnGroup GetFishGroupAt(Vector2 point){
-		return fishGroups[Random.Range(0,fishGroups.Length)];
-	}
 	void UnloadFish(){
-		Vector2 playerPos = PlayerInfo.GetPlayerPosition();
+		Vector2 playerPos = GetSpawnCenter();
 		for(int i = spawnedFish.Count-1; i >= 0; i--){
 			Transform fish = spawnedFish[i];
 			if(((Vector2)fish.position - playerPos).sqrMagnitude > unloadDistance*unloadDistance){
@@ -100,14 +72,16 @@ public class FishSpawnManager : MonoBehaviour
 			}
 		}
 	}
-	Vector2 GetValidSpawnPosition(FishSpawnGroup group){
+	(Vector2,SpawnGroup) GetValidSpawn(){
 		int iter = 0;
-		Vector2 spawnPos = Vector2.zero;
 		Camera cam = WorldCamera.GetCamera();
 		while(true){
-			spawnPos = GetRandomSpawnPosition();
-			if(group.isValidPosition(spawnPos)){
-				break;
+			Vector2 spawnPos = GetRandomSpawnPosition();
+			SpawnRegion region = GetSpawnRegionAt(spawnPos);
+			SpawnGroup[] validGroups = region.GetValidSpawnGroupsAt(spawnPos);
+			if(validGroups.Length > 0){
+				SpawnGroup group = validGroups[Random.Range(0,validGroups.Length)];
+				return (spawnPos,group);
 			}
 			iter++;
 			if(iter > 9999){
@@ -115,7 +89,19 @@ public class FishSpawnManager : MonoBehaviour
 				break;
 			}
 		}
-		return spawnPos;
+		return (Vector2.zero,null);
+	}
+	SpawnRegion GetSpawnRegionAt(Vector2 position){
+		float minDistSqr = Mathf.Infinity;
+		SpawnRegion minDistRegion = null;
+		foreach(SpawnRegion region in spawnRegions){
+			float distSqr = (position - (Vector2)region.transform.position).sqrMagnitude;
+			if(distSqr < minDistSqr){
+				minDistSqr = distSqr;
+				minDistRegion = region;
+			}
+		}
+		return minDistRegion;
 	}
 	Vector2 GetRandomSpawnPosition(){
 		Vector2 randPoint = Random.insideUnitCircle;
@@ -124,6 +110,9 @@ public class FishSpawnManager : MonoBehaviour
 		}
 		randPoint = randPoint.normalized;
 		randPoint *= Random.Range(minSpawnDistance,maxSpawnDistance);
-		return PlayerInfo.GetPlayerPosition() + randPoint;
-	}	
+		return GetSpawnCenter() + randPoint;
+	}
+	Vector2 GetSpawnCenter(){
+		return PlayerInfo.GetPlayerPosition();
+	}
 }

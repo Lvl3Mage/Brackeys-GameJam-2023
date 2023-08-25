@@ -490,7 +490,7 @@ MonoBehaviour:
   angularAcceleration: 100
   angularSpeed: 500
   maxAngularSpeed: 100
-  localForwardVector: {x: -1, y: 1}
+  localForwardVector: {x: -1, y: 0}
   linearAcceleration: 3
   slowSpeed: 2
   fastSpeed: 5

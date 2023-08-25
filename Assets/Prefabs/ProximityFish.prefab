@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 8430858984207706013}
   - component: {fileID: 8430858984207706012}
   - component: {fileID: 8430858984207706003}
+  - component: {fileID: 953788217643172203}
   - component: {fileID: 8430858984207706002}
   - component: {fileID: 8430858984207706001}
   m_Layer: 7
@@ -131,8 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behaviors:
-  - {fileID: 8430858984207706003}
+  - {fileID: 953788217643172203}
   - {fileID: 8430858984207706012}
+  - {fileID: 8430858984207706003}
 --- !u!114 &8430858984207706012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +215,56 @@ MonoBehaviour:
   approachFearStrength: 0
   approachFearHalfStrengthDistance: 0
   enableProximityFear: 1
+  proximityFearMaxStrength: 8
+  proximityFearMinStrength: -8
+  proximityFearHalfStrengthDistance: 3
+  fearLevel: 0
+  angularSpeed: 1600
+  maxAngularSpeed: 600
+  angularAcceleration: 50
+  linearSpeed: 8
+  linearAcceleration: 5
+  trajectorySharpness: 0
+  movementNoise:
+    noiseScale: 4
+    scrollSpeed: {x: 0.3, y: 0.7}
+    seed: {x: 0.24, y: -3.55}
+    minValue: -60
+    maxValue: 60
+  pathBlockingLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  scanAngleStepSize: 5
+  maxScanAngle: 180
+  scanDistance: 6
+  obstacleRepulsion: 2
+  rb: {fileID: 8430858984207706002}
+--- !u!114 &953788217643172203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430858984207706000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c375b61f27456044a28ae673b40f923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fearDecaySpeed: 1
+  fearMinValue: 0
+  fearMaxValue: 1.25
+  fearActiveBonus: 0
+  preferenceMultiplier: 2
+  enableSurpriseFear: 1
+  surpriseFearMaxStrength: 40
+  surpriseFearHalfStrengthDistance: 1
+  surpriseFearActivationVelocity: 7.5
+  surpriseFearActivationSteepness: 35
+  enableApproachFear: 0
+  approachFearStrength: 0
+  approachFearHalfStrengthDistance: 0
+  enableProximityFear: 0
   proximityFearMaxStrength: 8
   proximityFearMinStrength: -8
   proximityFearHalfStrengthDistance: 5

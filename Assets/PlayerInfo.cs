@@ -40,8 +40,7 @@ public class PlayerInfo : MonoBehaviour
 		instance = this;
 	}
 
-
-	void Update()
+	void FixedUpdate()
 	{
 		averageVelocityVector = Vector2.zero;
 		averageAccelerationVector = Vector2.zero;
@@ -58,6 +57,7 @@ public class PlayerInfo : MonoBehaviour
 				maxVelocityMagnitude = part.GetVelocity().magnitude;
 			}
 		}
+		// Debug.Log(maxVelocityMagnitude);
 		averageVelocityVector /= bodyParts.Length;
 		averageAccelerationVector /= bodyParts.Length;
 		averageVelocityMagnitude /= bodyParts.Length;

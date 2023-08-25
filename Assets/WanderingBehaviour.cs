@@ -149,7 +149,6 @@ public class WanderingBehaviour : FishBehaviour
 	}
 	Vector2 GenerateValidTarget(){
 		int iter = 0;
-		float minValue = Mathf.Infinity;
 		Vector2 point = GenerateTargetPerlin();
 		while(true){
 			Vector2 pointDelta = point-(Vector2)transform.position;
