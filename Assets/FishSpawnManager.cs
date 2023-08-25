@@ -8,7 +8,7 @@ public class FishSpawnManager : MonoBehaviour
 	[SerializeField] SpawnRegion[] spawnRegions;
 	[SerializeField] float maxSpawnDistance;
 	[SerializeField] float minSpawnDistance;
-
+	[SerializeField] float maxSpawnHeight = 0;
 	[SerializeField] float unloadDistance;
 	[SerializeField] int desiredFishAmount;
 	[SerializeField] PopulationPoint[] populationPoints;
@@ -110,7 +110,9 @@ public class FishSpawnManager : MonoBehaviour
 		}
 		randPoint = randPoint.normalized;
 		randPoint *= Random.Range(minSpawnDistance,maxSpawnDistance);
-		return GetSpawnCenter() + randPoint;
+		Vector2 pos = GetSpawnCenter() + randPoint;
+		pos.y = Mathf.Min(maxSpawnHeight, pos.y);
+		return pos;
 	}
 	Vector2 GetSpawnCenter(){
 		return PlayerInfo.GetPlayerPosition();
