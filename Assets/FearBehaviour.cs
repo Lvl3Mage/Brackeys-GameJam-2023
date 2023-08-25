@@ -83,7 +83,7 @@ public class FearBehaviour : FishBehaviour
 		fearLevel += approachFactor*distanceFactor*approachFearStrength*Time.deltaTime;
 	}
 	void ApplySurpriseFear(Vector2 playerDelta){
-		float maxVel = PlayerInfo.GetMaxVelocityMagnitude();
+		float maxVel = Mathf.Abs(PlayerInfo.GetAverageVelocityVector().magnitude - PlayerInfo.GetMaxVelocityMagnitude());
 		// Debug.Log(maxVel);
 		float activationValue = maxVel / (surpriseFearActivationVelocity*2);
 		if(surpriseFearActivationVelocity == 0){//NAN Checking

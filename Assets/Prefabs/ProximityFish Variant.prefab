@@ -7,18 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8430858984133357441, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8430858984133357441, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8430858984133357441, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8430858984207706000, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
       propertyPath: m_Name
       value: ProximityFish Variant

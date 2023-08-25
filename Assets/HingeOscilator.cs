@@ -15,7 +15,6 @@ public class HingeOscilator : MonoBehaviour
 	[HideInInspector] public float timeScale = 1;
 	[SerializeField] float restingPose;
 	[SerializeField] float restingApproachStrength;
-	[SerializeField] bool debug;
 	void Start()
 	{
 		directionPositive = initialState;
@@ -48,8 +47,5 @@ public class HingeOscilator : MonoBehaviour
 		JointMotor2D motor = joint.motor;
 		motor.motorSpeed = Mathf.LerpUnclamped(0,currentStrength,angleFactor);
 		joint.motor = motor;
-		if(debug){
-			Debug.Log($"jointAngle: {joint.jointAngle}, targetAngle: {targetAngle}");
-		}
 	}
 }
