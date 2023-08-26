@@ -8,7 +8,7 @@ public class PopulationPoint : MonoBehaviour
 	[SerializeField] [Range(0.1f,1)] float populationInfluence = 1;
 	[SerializeField] bool debug;
 	public int population {get{return fishPopulation;}}
-	public float influence {get{return 1f/populationInfluence;}}
+	public float influence {get{return populationInfluence;}}
 	void OnDrawGizmos(){
 		if(!debug){
 			return;

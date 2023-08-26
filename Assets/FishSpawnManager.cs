@@ -51,7 +51,7 @@ public class FishSpawnManager : MonoBehaviour
 				minDist = distance;
 			}
 		}
-		return minDistPopulation
+		return minDistPopulation;
 
 		// float totalWeight = 0;
 		// float[] weights = new float[populationPoints.Length];
