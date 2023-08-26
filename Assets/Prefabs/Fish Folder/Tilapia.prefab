@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 8964045203756979788}
   - component: {fileID: 793870635119665446}
   m_Layer: 7
-  m_Name: ProximityFish
+  m_Name: Tilapia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
