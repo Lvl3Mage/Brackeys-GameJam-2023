@@ -6,10 +6,21 @@ using UnityEngine.UIElements;
 
 public class ShopManager : MonoBehaviour
 {
+	public static ShopManager instance;
+	void Awake(){
+		if(instance != null){
+			Debug.LogError("Another instance of ShopManager already exists!");
+			return;
+		}
+		instance = this;
+	}
+	public float money { get; private set;}
 	[SerializeField] CanvasGroup shopManagerPanel;
 	[SerializeField] CanvasGroup shopNotification;
 	[SerializeField] float accessibleDepth;
 	[SerializeField] float notificationFadeSpeed;
+	public UpgradableValue<PhotoCameraConfig> cameraStats;
+	public UpgradableValue<float> oxygenDuration;
 	void Start()
 	{
 		ToggleShop(false);
@@ -42,4 +53,30 @@ public class ShopManager : MonoBehaviour
 		shopManagerPanel.interactable = value;
 		shopManagerPanel.blocksRaycasts = value;
 	}
+}
+[System.Serializable]
+public class UpgradableValue<T>
+{
+	[SerializeField] T Value;
+	[SerializeField] Upgrade[] upgrades;
+	int upgradeIndex = 0;
+	public void AddUpgrade(){
+		Upgrade upgrade = upgrades[upgradeIndex];
+		Value = upgrade.value;
+		if(OnChange != null){
+			OnChange();
+		}
+	}
+	public float GetUpgradeCost(){
+		Upgrade upgrade = upgrades[upgradeIndex];
+		return upgrade.cost;
+	}
+	[System.Serializable]
+	public struct Upgrade{
+		public T value;
+		public float cost;
+	}
+	[HideInInspector] public T value {get{return Value;}}
+	public delegate void OnChangeHandler();
+	public event OnChangeHandler OnChange;
 }
