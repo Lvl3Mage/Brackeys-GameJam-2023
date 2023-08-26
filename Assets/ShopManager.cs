@@ -21,6 +21,9 @@ public class ShopManager : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Space) && shopAccessible){
 			ToggleShop(!shopOpen);
 		}
+		if(!shopAccessible && shopOpen){
+			ToggleShop(false);
+		}
 	}
 	
 	public void Open()
