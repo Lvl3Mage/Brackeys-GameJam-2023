@@ -2126,6 +2126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346f8579b7458eb469de55a3d01beeb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingMoney: 0
   shopManagerPanel: {fileID: 6942839798385050716}
   shopNotification: {fileID: 6942839799486802512}
   accessibleDepth: -2
@@ -2163,7 +2164,7 @@ MonoBehaviour:
         frameSprite: {fileID: 21300000, guid: 2f7415b5c31117f48a81e8ec75242f27, type: 3}
       cost: 200
   oxygenDuration:
-    Value: 30
+    Value: 5
     upgrades:
     - value: 60
       cost: 200

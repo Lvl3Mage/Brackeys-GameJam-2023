@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 450668990035268860}
   - component: {fileID: 450668990035268861}
   - component: {fileID: 450668990035268858}
+  - component: {fileID: 1697624302794007746}
   m_Layer: 6
   m_Name: Diver
   m_TagString: Player
@@ -613,6 +614,25 @@ MonoBehaviour:
   - part: {fileID: 450668991110727039}
   - part: {fileID: 450668991050048360}
   - part: {fileID: 450668990990736072}
+--- !u!114 &1697624302794007746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450668990035268859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc42ade65e113eb4c86a19c250d8d3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oxygenSurfaceRechargeRate: 15
+  surfaceDepth: -1
+  slider: {fileID: 356010608020530637}
+  drowningVolume: {fileID: 0}
+  gracePeriodLength: 5
+  drowningStart: 1
+  drowningEnd: 0.2
 --- !u!1 &450668990137624725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,6 +3528,7 @@ MonoBehaviour:
   cooldown: 1
   sprite: {fileID: 7042809452528671675}
   animator: {fileID: 5481223206440314466}
+  camSound: {fileID: 0}
 --- !u!95 &5481223206440314466
 Animator:
   serializedVersion: 3

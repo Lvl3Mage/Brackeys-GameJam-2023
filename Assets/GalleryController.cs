@@ -16,7 +16,7 @@ public class GalleryController : MonoBehaviour
 	bool open = false;
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.P)){
+		if(Input.GetKeyDown(KeyCode.Q)){
 			ToggleWindow(!open);
 		}
 	}
