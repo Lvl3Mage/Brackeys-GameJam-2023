@@ -39,7 +39,7 @@ public class FishSpawnManager : MonoBehaviour
 		}
 	}
 	float GetPopulationAtPosition(Vector2 position){
-		float minDist = -1;
+		float minDist = Mathf.Infinity;
 		float minDistPopulation = 0;
 
 		for(int i=0;i<populationPoints.Length;i++){
