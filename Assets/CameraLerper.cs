@@ -10,7 +10,7 @@ public class CameraLerper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Application.targetFrameRate = 144;
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class CameraLerper : MonoBehaviour
 
     public void PlayGame(string newScene)
     {
-        SceneManager.LoadScene(newScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void CloseGame()
     {
