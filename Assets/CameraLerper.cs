@@ -21,7 +21,7 @@ public class CameraLerper : MonoBehaviour
 
     public void PlayGame(string newScene)
     {
-        SceneManager.LoadScene(newScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void CloseGame()
     {
