@@ -41,7 +41,7 @@ public class FishSpawnManager : MonoBehaviour
 			if(distance < 0.01f){
 				return point.population;
 			}
-			float weight = 1/Mathf.Pow(distance,populationInterpolationSmoothness);
+			float weight = 1/Mathf.Pow(distance,point.influence);
 			weights[i] = weight;
 			totalWeight += weight;
 			
