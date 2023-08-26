@@ -28,7 +28,7 @@ public class SpawnGroup
 		Camera cam = WorldCamera.GetCamera();
 
 		Vector2 camPos = (Vector2)cam.transform.position;
-		Vector2 camSize = new Vector2(cam.orthographicSize*2, cam.orthographicSize*2*cam.aspect);
+		Vector2 camSize = new Vector2(cam.orthographicSize*2*cam.aspect, cam.orthographicSize*2);
 		float camRectDistance = RectangleSDF(position, camSize, camPos);
 		bool outsideCamera = camRectDistance > minCameraDistance;
 

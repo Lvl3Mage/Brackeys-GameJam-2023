@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhotoTarget : MonoBehaviour
 {
-
+	[SerializeField] PhotoTargetType type;
 	void Start()
 	{
 		
@@ -14,5 +14,8 @@ public class PhotoTarget : MonoBehaviour
 	void Update()
 	{
 		
+	}
+	public PhotoTargetType GetType(){
+		return type;
 	}
 }

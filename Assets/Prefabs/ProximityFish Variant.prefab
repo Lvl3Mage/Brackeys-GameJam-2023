@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProximityFish Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8430858984207706013, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
+      propertyPath: behaviors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8430858984207706014, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
       propertyPath: m_RootOrder
       value: 0
