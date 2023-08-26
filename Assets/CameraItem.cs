@@ -8,6 +8,7 @@ public class CameraItem : InventoryItem
 	[SerializeField] float cooldown;
 	[SerializeField] GameObject sprite;
 	[SerializeField] Animator animator;
+	[SerializeField] private AudioSource camSound;
 	protected override void OnEquip(){
 		sprite.SetActive(true);
 		PhotoManager.instance.Toggle(true);
@@ -36,6 +37,7 @@ public class CameraItem : InventoryItem
 	IEnumerator TakePhoto(){
 		cooldownLeft = cooldown;
 		animator.SetTrigger("Flash");
+		camSound.Play();
 		while(!flashOn){
 			yield return null;
 		}

@@ -15,6 +15,7 @@ public class ShopManager : MonoBehaviour
 		instance = this;
 	}
 	[HideInInspector] public float money { get; private set;}
+	[SerializeField] private float startingMoney;
 	public void AddMoney(float amount){
 		money += amount;
 		UpdateAll();
@@ -37,6 +38,7 @@ public class ShopManager : MonoBehaviour
 	void Start()
 	{
 		ToggleShop(false);
+		money = startingMoney;
 		UpdateAll();
 	}
 	bool shopOpen = false;
