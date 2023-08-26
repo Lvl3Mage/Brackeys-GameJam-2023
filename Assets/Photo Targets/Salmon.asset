@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88a32e0df75042429097fd1272f3ae9, type: 3}
   m_Name: Salmon
   m_EditorClassIdentifier: 
-  Id: Name
-  Name: Name
+  Id: 1745290456
+  Name: Salmon
   Description: 
-  Value: 100
+  Value: 150

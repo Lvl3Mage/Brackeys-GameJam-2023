@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88a32e0df75042429097fd1272f3ae9, type: 3}
   m_Name: Clownfish
   m_EditorClassIdentifier: 
-  Id: Name
-  Name: Name
-  Description: 
-  Value: 100
+  Id: 1383282814
+  Name: Clown fish
+  Description: Not related with that famous movie
+  Value: 130

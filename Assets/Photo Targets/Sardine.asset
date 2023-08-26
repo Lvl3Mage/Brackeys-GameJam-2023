@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88a32e0df75042429097fd1272f3ae9, type: 3}
   m_Name: Sardine
   m_EditorClassIdentifier: 
-  Id: 
-  Name: 
-  Description: 
-  Value: 0
+  Id: 686775754
+  Name: Sardine
+  Description: As interesting as dust in an old home
+  Value: 10

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88a32e0df75042429097fd1272f3ae9, type: 3}
   m_Name: PhantomJelly
   m_EditorClassIdentifier: 
-  Id: 
-  Name: 
-  Description: 
-  Value: 0
+  Id: 2060651038
+  Name: Phantom Jelly
+  Description: 57 48 41 54 20 54 48 45 20 48 45 4c 4c 20 49 53 20 54 48 49 53
+  Value: 210

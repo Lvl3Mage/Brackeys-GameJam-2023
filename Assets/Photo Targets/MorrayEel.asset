@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88a32e0df75042429097fd1272f3ae9, type: 3}
   m_Name: MorrayEel
   m_EditorClassIdentifier: 
-  Id: 
-  Name: 
+  Id: 1425055299
+  Name: Morray Eel
   Description: 
-  Value: 0
+  Value: 190

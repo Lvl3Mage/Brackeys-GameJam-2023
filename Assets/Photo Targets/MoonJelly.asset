@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88a32e0df75042429097fd1272f3ae9, type: 3}
   m_Name: MoonJelly
   m_EditorClassIdentifier: 
-  Id: Name
-  Name: Name
-  Description: 
-  Value: 100
+  Id: 1723108889
+  Name: Moon Jelly
+  Description: 'Kinda pretty? But '
+  Value: 20

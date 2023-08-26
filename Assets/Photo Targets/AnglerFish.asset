@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88a32e0df75042429097fd1272f3ae9, type: 3}
   m_Name: AnglerFish
   m_EditorClassIdentifier: 
-  Id: 
-  Name: 
-  Description: 
-  Value: 0
+  Id: 1568045382
+  Name: Anglerfish
+  Description: They say it can only be found on the deepest of the depths...
+  Value: 200
