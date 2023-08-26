@@ -61,11 +61,11 @@ public class SpawnRegion : MonoBehaviour
 	}
 	void OnDrawGizmos(){
 		if(!debug){return;}
-		Gizmos.color = new Color(0,0,1,0.3f);
+		Gizmos.color = new Color(0,0,1,0.1f);
 		Gizmos.DrawSphere(transform.position, maxSpawnDistance);
 		Gizmos.DrawSphere(transform.position, minSpawnDistance);
 
-		Gizmos.color = new Color(1,0,0,0.3f); 
+		Gizmos.color = new Color(1,0,0,0.1f); 
 		Gizmos.DrawSphere(transform.position, unloadDistanceFromRegion);
 	}
 }

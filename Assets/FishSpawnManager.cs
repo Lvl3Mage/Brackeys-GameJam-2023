@@ -110,5 +110,8 @@ public class FishSpawnManager : MonoBehaviour
 		Gizmos.color = Color.yellow;
 		Vector2 chosenRegion = GetSpawnRegionAt(PlayerInfo.GetPlayerPosition()).transform.position;
 		Gizmos.DrawSphere(chosenRegion, 3f);
+		Gizmos.color =  new Color(1,0,0,0.1f); 
+
+		Gizmos.DrawSphere(PlayerInfo.GetPlayerPosition(), minUnloadDistanceFromPlayer);
 	}
 }
