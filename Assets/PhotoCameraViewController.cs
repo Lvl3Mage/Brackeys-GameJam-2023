@@ -25,7 +25,7 @@ public class PhotoCameraViewController : MonoBehaviour
 
 		Vector2 targetPos = playerPos + playerDelta;
 
-		transform.position = Vector2.Lerp(transform.position, targetPos, stats.speed*Time.fixedDeltaTime);
+		transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, targetPos.y, transform.position.z), stats.speed*Time.fixedDeltaTime);
 	}
 }
 [System.Serializable]

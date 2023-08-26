@@ -4,6 +4,8 @@ using UnityEngine;
 using MyBox;
 public class PhotoManager : MonoBehaviour
 {
+
+	public static PhotoManager instance;
 	[SerializeField] Camera camera;
 	[SerializeField] Vector2Int photoResolution;
 	[SerializeField] float maxQualityPerTargetType;
@@ -11,6 +13,11 @@ public class PhotoManager : MonoBehaviour
 	[SerializeField] LayerMask photoTargetLayers;
 	void Awake()
 	{
+		if(instance != null){
+			Debug.LogError("Another instance of PhotoManager already exists!");
+			return;
+		}
+		instance = this;
 		library = new PhotoLibrary(maxQualityPerTargetType);
 	}
 
@@ -85,6 +92,9 @@ public class PhotoManager : MonoBehaviour
 		}
 		return targets;
 	}
+	public PhotoGroup[] GetGroups(){
+		return library.GetGroups();
+	}
 	void OnDrawGizmos(){
 		Gizmos.color = Color.red;
 		Vector2 cameraHalfSize = new Vector2(camera.orthographicSize*((float)photoResolution.x/(float)photoResolution.y), camera.orthographicSize);
@@ -118,7 +128,13 @@ public class PhotoLibrary
 		}
 		return library[id];
 	}
-
+	public PhotoGroup[] GetGroups(){
+		List<PhotoGroup> groups = new List<PhotoGroup>();
+		foreach(var pair in library){
+			groups.Add(pair.Value.GetAsGroup());
+		}
+		return groups.ToArray();
+	}
 	public class PhotoCollection
 	{
 
@@ -147,7 +163,24 @@ public class PhotoLibrary
 		public float EvaluatePhoto(Photo photo){
 			return Mathf.Min(remainingQuality,photo.quality)*photo.type.value;
 		}
+		public PhotoGroup GetAsGroup(){
+			if(photos.Count == 0){
+				return null;
+			}
+			return new PhotoGroup(bestPhoto, bestPhoto.type, photos.ToArray());
+		}
 	}
+}
+public class PhotoGroup
+{
+	public PhotoGroup(Photo _bestPhoto, PhotoTargetType _type, Photo[] _photos){
+		bestPhoto = _bestPhoto;
+		type = _type;
+		photos = _photos;
+	}
+	public Photo bestPhoto;
+	public PhotoTargetType type;
+	public Photo[] photos;
 }
 public class Photo
 {
