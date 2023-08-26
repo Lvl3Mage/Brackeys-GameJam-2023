@@ -29,8 +29,11 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] TextWriter camCostDisplay;
 	[SerializeField] Button oxygenUpgradeButton;
 	[SerializeField] TextWriter oxygenCostDisplay;
+	[SerializeField] Button flashUpgradeButton;
+	[SerializeField] TextWriter flashCostDisplay;
 	public UpgradableField<PhotoCameraConfig> cameraStats;
 	public UpgradableField<float> oxygenDuration;
+	public UpgradableField<FlashlightConfig> flashLightStats;
 	void Start()
 	{
 		ToggleShop(false);
@@ -63,6 +66,9 @@ public class ShopManager : MonoBehaviour
 	public void UpgradeOxygen(){
 		UpgradeField<float>(oxygenDuration, oxygenUpgradeButton, oxygenCostDisplay);
 	}
+	public void UpgradeFlashlight(){
+		UpgradeField<FlashlightConfig>(flashLightStats, flashUpgradeButton, flashCostDisplay);
+	}
 
 	void UpgradeField<T>(UpgradableField<T> field, Button relatedButton, TextWriter relatedCostDisplay){
 		float cost = field.GetUpgradeCost();
@@ -73,6 +79,7 @@ public class ShopManager : MonoBehaviour
 	void UpdateAll(){
 		UpdateUpgradeButton(camUpgradeButton ,camCostDisplay,cameraStats);
 		UpdateUpgradeButton(oxygenUpgradeButton, oxygenCostDisplay, oxygenDuration);
+		UpdateUpgradeButton(flashUpgradeButton, flashCostDisplay, flashLightStats);
 		UpdateMoneyDisplay();
 	}
 	void UpdateUpgradeButton<T>(Button button, TextWriter costDisplay, UpgradableField<T> field){

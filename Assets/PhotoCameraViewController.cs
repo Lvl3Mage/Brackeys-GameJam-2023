@@ -6,6 +6,7 @@ public class PhotoCameraViewController : MonoBehaviour
 {
 	[SerializeField] Camera photoCamera;
 	[SerializeField] Transform cameraViewVisual;
+	[SerializeField] SpriteRenderer frameSR;
 	void Start()
 	{
 		
@@ -26,6 +27,7 @@ public class PhotoCameraViewController : MonoBehaviour
 		Vector2 targetPos = playerPos + playerDelta;
 
 		transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, targetPos.y, transform.position.z), stats.speed*Time.fixedDeltaTime);
+		frameSR.sprite = stats.frameSprite;
 	}
 }
 [System.Serializable]
@@ -34,4 +36,7 @@ public struct PhotoCameraConfig
 	public float reach;
 	public float zoom;
 	public float speed;
+	public float flashRange;
+	public float flashSize;
+	public Sprite frameSprite;
 }

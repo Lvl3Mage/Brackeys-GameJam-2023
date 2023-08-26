@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: 8f097937ef1a6034c836b8c2003f91c3
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 3556181715638617739
+    second: flashlight
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -259,7 +262,7 @@ TextureImporter:
         height: 515
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 85, y: 55, z: 20, w: 60}
+      border: {x: 85, y: 65, z: 20, w: 75}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -280,13 +283,34 @@ TextureImporter:
         height: 506
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 85, y: 55, z: 20, w: 60}
+      border: {x: 85, y: 65, z: 20, w: 70}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: d1bfabbcf55e3c710800000000000000
       internalID: 1712464482933603101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flashlight
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 737
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b86016dcd681a5130800000000000000
+      internalID: 3556181715638617739
       vertices: []
       indices: 
       edges: []

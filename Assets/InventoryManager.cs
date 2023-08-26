@@ -9,7 +9,14 @@ public class InventoryManager : MonoBehaviour
 	int selectedItemIndex = 0;
 	void Start()
 	{
-		
+		for(int i = 0; i < items.Length; i++){
+			if(i == selectedItemIndex){
+				items[i].Equip();
+			}
+			else{
+				items[i].Unequip();
+			}
+		}
 	}
 
 

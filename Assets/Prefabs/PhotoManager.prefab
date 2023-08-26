@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5707218116961789024, guid: 8f097937ef1a6034c836b8c2003f91c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f7415b5c31117f48a81e8ec75242f27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -166,6 +166,7 @@ MonoBehaviour:
   photoTargetLayers:
     serializedVersion: 2
     m_Bits: 512
+  cameraFrame: {fileID: 8733816260160271310}
 --- !u!114 &8733816260484259922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photoCamera: {fileID: 8733816260484259923}
   cameraViewVisual: {fileID: 8733816260160271309}
+  frameSR: {fileID: 7620204404017366863}
 --- !u!20 &8733816260484259923
 Camera:
   m_ObjectHideFlags: 0

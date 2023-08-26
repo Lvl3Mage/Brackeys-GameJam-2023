@@ -11,6 +11,7 @@ public class PhotoManager : MonoBehaviour
 	[SerializeField] float maxQualityPerTargetType;
 	PhotoLibrary library;
 	[SerializeField] LayerMask photoTargetLayers;
+	[SerializeField] GameObject cameraFrame;
 	void Awake()
 	{
 		if(instance != null){
@@ -20,15 +21,10 @@ public class PhotoManager : MonoBehaviour
 		instance = this;
 		library = new PhotoLibrary(maxQualityPerTargetType);
 	}
-
-
-	void Update()
-	{
-		if(Input.GetMouseButtonDown(0)){
-			CapturePhoto();
-		}
+	public void Toggle(bool val){
+		cameraFrame.SetActive(val);
 	}
-	void CapturePhoto(){
+	public void CapturePhoto(){
 		//camera flash --> make coroutine instead of void
 		RenderTexture rt = new RenderTexture(photoResolution.x, photoResolution.y, 16, RenderTextureFormat.RGB565);//might want to assign new rt after sucessfull photo capture?
 		camera.targetTexture = rt;
