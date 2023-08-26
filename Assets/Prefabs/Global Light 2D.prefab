@@ -89,4 +89,4 @@ MonoBehaviour:
   maxIntensity: 1
   maxIntensityDepth: -1
   minIntensity: 0
-  minIntensityDepth: -30
+  minIntensityDepth: -60

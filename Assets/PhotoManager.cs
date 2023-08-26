@@ -27,6 +27,7 @@ public class PhotoManager : MonoBehaviour
 	public void CapturePhoto(){
 		//camera flash --> make coroutine instead of void
 		RenderTexture rt = new RenderTexture(photoResolution.x, photoResolution.y, 16, RenderTextureFormat.RGB565);//might want to assign new rt after sucessfull photo capture?
+		rt.Create();
 		camera.targetTexture = rt;
 		camera.Render();
 
@@ -45,7 +46,6 @@ public class PhotoManager : MonoBehaviour
 			foreach(Photo photo in photos){
 				float gain = library.AddPhoto(photo);
 				ShopManager.instance.AddMoney(gain);
-				Debug.Log("Money gained: " + gain);
 			}
 
 			// Photo bestPhoto = BestPhotoOfTargets(targets, camera.transform.position, rt);
