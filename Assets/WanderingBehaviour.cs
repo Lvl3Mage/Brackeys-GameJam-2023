@@ -64,6 +64,15 @@ public class WanderingBehaviour : FishBehaviour
 	[SerializeField] float maxScanAngle;
 	[SerializeField] float scanDistance;
 	[SerializeField] [Range(0,2)] float obstacleRepulsion;
+
+	[ButtonMethod]
+	void RandomizeMovementSeed(){
+		targetSelectionNoiseX.RandomizeSeed();
+		targetSelectionNoiseY.RandomizeSeed();
+		rotationNoise.RandomizeSeed();
+
+	}
+
 	void Start(){
 		SelectNewTarget();
 	}
