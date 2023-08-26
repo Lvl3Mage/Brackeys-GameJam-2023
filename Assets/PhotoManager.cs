@@ -41,6 +41,7 @@ public class PhotoManager : MonoBehaviour
 			}
 			foreach(Photo photo in photos){
 				float gain = library.AddPhoto(photo);
+				ShopManager.instance.AddMoney(gain);
 				Debug.Log("Money gained: " + gain);
 			}
 

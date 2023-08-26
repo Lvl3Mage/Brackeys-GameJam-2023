@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
@@ -14,16 +14,27 @@ public class ShopManager : MonoBehaviour
 		}
 		instance = this;
 	}
-	public float money { get; private set;}
+	[HideInInspector] public float money { get; private set;}
+	public void AddMoney(float amount){
+		money += amount;
+		UpdateAll();
+
+	}
 	[SerializeField] CanvasGroup shopManagerPanel;
 	[SerializeField] CanvasGroup shopNotification;
 	[SerializeField] float accessibleDepth;
 	[SerializeField] float notificationFadeSpeed;
-	public UpgradableValue<PhotoCameraConfig> cameraStats;
-	public UpgradableValue<float> oxygenDuration;
+	[SerializeField] TextWriter moneyDisplay;
+	[SerializeField] Button camUpgradeButton;
+	[SerializeField] TextWriter camCostDisplay;
+	[SerializeField] Button oxygenUpgradeButton;
+	[SerializeField] TextWriter oxygenCostDisplay;
+	public UpgradableField<PhotoCameraConfig> cameraStats;
+	public UpgradableField<float> oxygenDuration;
 	void Start()
 	{
 		ToggleShop(false);
+		UpdateAll();
 	}
 	bool shopOpen = false;
 	void Update(){
@@ -36,7 +47,6 @@ public class ShopManager : MonoBehaviour
 			ToggleShop(false);
 		}
 	}
-	
 	public void Open()
 	{
 		// On Something do open the shop
@@ -47,6 +57,37 @@ public class ShopManager : MonoBehaviour
 		// On Something do close the shop
 		ToggleShop(false);
 	}
+	public void UpgradeCamera(){
+		UpgradeField<PhotoCameraConfig>(cameraStats, camUpgradeButton, camCostDisplay);
+	}
+	public void UpgradeOxygen(){
+		UpgradeField<float>(oxygenDuration, oxygenUpgradeButton, oxygenCostDisplay);
+	}
+
+	void UpgradeField<T>(UpgradableField<T> field, Button relatedButton, TextWriter relatedCostDisplay){
+		float cost = field.GetUpgradeCost();
+		money -= cost;
+		field.AddUpgrade();
+		UpdateAll();
+	}
+	void UpdateAll(){
+		UpdateUpgradeButton(camUpgradeButton ,camCostDisplay,cameraStats);
+		UpdateUpgradeButton(oxygenUpgradeButton, oxygenCostDisplay, oxygenDuration);
+		UpdateMoneyDisplay();
+	}
+	void UpdateUpgradeButton<T>(Button button, TextWriter costDisplay, UpgradableField<T> field){
+		if(!field.UpgradesLeft()){
+			costDisplay.Set("--");
+			button.interactable = false;
+			return;
+		}
+		float cost = field.GetUpgradeCost();
+		costDisplay.Set(cost.ToString("0.00"));
+		button.interactable = money >= cost;
+	}
+	void UpdateMoneyDisplay(){
+		moneyDisplay.Set(money.ToString("0.00"));
+	}
 	void ToggleShop(bool value){
 		shopOpen = value;
 		shopManagerPanel.alpha = value ? 1 : 0;
@@ -55,21 +96,33 @@ public class ShopManager : MonoBehaviour
 	}
 }
 [System.Serializable]
-public class UpgradableValue<T>
+public class UpgradableField<T>
 {
 	[SerializeField] T Value;
 	[SerializeField] Upgrade[] upgrades;
 	int upgradeIndex = 0;
 	public void AddUpgrade(){
+		if(!UpgradesLeft()){
+			Debug.LogWarning("No upgrades left!");
+			return;
+		}
 		Upgrade upgrade = upgrades[upgradeIndex];
 		Value = upgrade.value;
+		upgradeIndex ++;
 		if(OnChange != null){
 			OnChange();
 		}
 	}
 	public float GetUpgradeCost(){
+		if(!UpgradesLeft()){
+			Debug.LogWarning("No upgrades left!");
+			return -1;
+		}
 		Upgrade upgrade = upgrades[upgradeIndex];
 		return upgrade.cost;
+	}
+	public bool UpgradesLeft(){
+		return upgradeIndex < upgrades.Length;
 	}
 	[System.Serializable]
 	public struct Upgrade{
