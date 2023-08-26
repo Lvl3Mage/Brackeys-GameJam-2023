@@ -5,7 +5,20 @@ using UnityEngine;
 public class SpawnRegion : MonoBehaviour
 {
 	[SerializeField] SpawnGroup[] spawnGroups;
-	public SpawnGroup[] GetValidSpawnGroupsAt(Vector2 position){
+	[SerializeField] int fishPopulation;
+	[SerializeField] float maxSpawnDistance;
+	[SerializeField] float minSpawnDistance = 0;
+	[SerializeField] float maxSpawnHeight = 0;
+	public float population {get{return fishPopulation;}}
+	public Transform[] Spawn(){
+		(Vector2,SpawnGroup) spawn = GetValidSpawn();
+		if(spawn.Item2 == null){//No valid positions found
+			return new Transform[0];
+		}
+		Transform[] groupFish = spawn.Item2.SpawnAt(spawn.Item1);
+		return groupFish;
+	}
+	SpawnGroup[] GetValidSpawnGroupsAt(Vector2 position){
 		List<SpawnGroup> groups = new List<SpawnGroup>();
 		foreach(SpawnGroup group in spawnGroups){
 			if(group.isValidPosition(position)){
@@ -13,6 +26,40 @@ public class SpawnRegion : MonoBehaviour
 			}
 		}
 		return groups.ToArray();
+	}
+	(Vector2,SpawnGroup) GetValidSpawn(){
+		int iter = 0;
+		Camera cam = WorldCamera.GetCamera();
+		while(true){
+			Vector2 spawnPos = GetRandomSpawnPosition();
+			SpawnGroup[] validGroups = GetValidSpawnGroupsAt(spawnPos);
+			if(validGroups.Length > 0){
+				SpawnGroup group = validGroups[Random.Range(0,validGroups.Length)];
+				return (spawnPos,group);
+			}
+			iter++;
+			if(iter > 999){
+				Debug.LogWarning("FishSpawn iteration count exceeded maximum!");
+				break;
+			}
+		}
+		return (Vector2.zero,null);
+	}
+	Vector2 GetRandomSpawnPosition(){
+		Vector2 randPoint = Random.insideUnitCircle;
+		if(randPoint.sqrMagnitude == 0.0f){
+			randPoint = Vector2.up;
+		}
+		randPoint = randPoint.normalized;
+		randPoint *= Random.Range(minSpawnDistance,maxSpawnDistance);
+		Vector2 pos = (Vector2)transform.position + randPoint;
+		pos.y = Mathf.Min(maxSpawnHeight, pos.y);
+		return pos;
+	}
+	void OnDrawGizmos(){
+		Gizmos.color = new Color(0,0,1,0.3f);
+		Gizmos.DrawSphere(transform.position, maxSpawnDistance);
+		Gizmos.DrawSphere(transform.position, minSpawnDistance);
 	}
 }
 [System.Serializable]
@@ -24,6 +71,9 @@ public class SpawnGroup
 	[SerializeField] float maxSpawnDistance;
 	[SerializeField] float minCameraDistance;
 	[SerializeField] LayerMask obstacleMask;
+	
+	
+
 	public bool isValidPosition(Vector2 position){
 		Camera cam = WorldCamera.GetCamera();
 
