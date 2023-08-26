@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MyBox;
 public class FishSpawnManager : MonoBehaviour
 {
 
+	[SerializeField] bool autoSetSpawnRegions = true;
 	[SerializeField] SpawnRegion[] spawnRegions;
 	[SerializeField] float maxSpawnDistance;
 	[SerializeField] float minSpawnDistance;
 	[SerializeField] float maxSpawnHeight = 0;
 	[SerializeField] float unloadDistance;
 	[SerializeField] int desiredFishAmount;
+	[SerializeField] bool autoSetPopulationPoints = true;
 	[SerializeField] PopulationPoint[] populationPoints;
 	[SerializeField] float populationInterpolationSmoothness;
 	[SerializeField] int hardPopulationCap;
@@ -19,6 +21,12 @@ public class FishSpawnManager : MonoBehaviour
 	float spawnCooldown;
 	void Start()
 	{
+		if(autoSetSpawnRegions){
+			spawnRegions = GameObject.FindObjectsOfType<SpawnRegion>();
+		}
+		if(autoSetPopulationPoints){
+			populationPoints = GameObject.FindObjectsOfType<PopulationPoint>();
+		}
 		
 	}
 
