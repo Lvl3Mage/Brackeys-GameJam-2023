@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 public class OxygenController : MonoBehaviour
 {
 	[SerializeField] float oxygenSurfaceRechargeRate;
+	[SerializeField] float gracePeriodSurfaceRechargeRate = 5;
 	[SerializeField] float surfaceDepth;
 	[SerializeField] SliderController slider;
 	[SerializeField] Volume drowningVolume;
@@ -26,19 +27,19 @@ public class OxygenController : MonoBehaviour
 		}
 		if(PlayerInfo.GetPlayerPosition().y > surfaceDepth){
 			oxygenTime += oxygenSurfaceRechargeRate*Time.deltaTime;
-			gracePeriodLeft = gracePeriodLength;
+			gracePeriodLeft += gracePeriodSurfaceRechargeRate*Time.deltaTime;
 		}
 		else{
 			oxygenTime -= Time.deltaTime;
 		}
+		if(oxygenTime <= 0){
+			gracePeriodLeft -= Time.deltaTime;
+		}
+		gracePeriodLeft = Mathf.Clamp(gracePeriodLeft,0,gracePeriodLength);
 		oxygenTime = Mathf.Clamp(oxygenTime,0,ShopManager.instance.oxygenDuration.value);
 		slider.SetValue(oxygenTime);
 		slider.SetRange(0,ShopManager.instance.oxygenDuration.value);
 
-		if(oxygenTime <= 0){
-			gracePeriodLeft -= Time.deltaTime;
-			gracePeriodLeft = Mathf.Clamp(gracePeriodLeft,0,gracePeriodLength);
-		}
 
 		drowningVolume.weight = Mathf.Clamp01(MathUtils.TransformRange(gracePeriodLeft/gracePeriodLength, drowningStart, drowningEnd, 0, 1));
 
