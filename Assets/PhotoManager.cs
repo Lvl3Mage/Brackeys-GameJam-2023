@@ -33,7 +33,6 @@ public class PhotoManager : MonoBehaviour
 
 
 		PhotoTarget[] targets = GetTargetsInFrame();
-		Debug.Log(targets.Length);
 		if(targets.Length == 0){
 			return;
 		}

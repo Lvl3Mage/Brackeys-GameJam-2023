@@ -16,7 +16,7 @@ public class FishSpawnManager : MonoBehaviour
 	[SerializeField] int hardPopulationCap;
 	List<Transform> spawnedFish = new List<Transform>();
 
-
+	float spawnCooldown;
 	void Start()
 	{
 		
@@ -25,6 +25,12 @@ public class FishSpawnManager : MonoBehaviour
 
 	void Update()
 	{
+		spawnCooldown -= Time.deltaTime;
+		spawnCooldown = Mathf.Max(0, spawnCooldown);
+		if(spawnCooldown > 0){
+			return;
+		}
+
 		float population = Mathf.Min(GetPopulationAtPosition(GetSpawnCenter()),hardPopulationCap);
 		
 		UnloadFish();
@@ -33,28 +39,43 @@ public class FishSpawnManager : MonoBehaviour
 		}
 	}
 	float GetPopulationAtPosition(Vector2 position){
-		float totalWeight = 0;
-		float[] weights = new float[populationPoints.Length];
+		float minDist = -1;
+		float minDistPopulation = 0;
+
 		for(int i=0;i<populationPoints.Length;i++){
 			PopulationPoint point = populationPoints[i];
 			float distance = (position - (Vector2)point.transform.position).magnitude;
-			if(distance < 0.01f){
-				return point.population;
+			distance /= point.influence;
+			if(distance < minDist){
+				minDistPopulation = point.population;
+				minDist = distance;
 			}
-			float weight = 1/Mathf.Pow(distance,point.influence);
-			weights[i] = weight;
-			totalWeight += weight;
+		}
+		return minDistPopulation
+
+		// float totalWeight = 0;
+		// float[] weights = new float[populationPoints.Length];
+		// for(int i=0;i<populationPoints.Length;i++){
+		// 	PopulationPoint point = populationPoints[i];
+		// 	float distance = (position - (Vector2)point.transform.position).magnitude;
+		// 	if(distance < 0.01f){
+		// 		return point.population;
+		// 	}
+		// 	float weight = 1/Mathf.Pow(distance,point.influence);
+		// 	weights[i] = weight;
+		// 	totalWeight += weight;
 			
-		}
-		float population = 0;
-		for(int i=0; i < populationPoints.Length; i++){
-			population += (weights[i]/totalWeight)*populationPoints[i].population;
-		}
-		return population;
+		// }
+		// float population = 0;
+		// for(int i=0; i < populationPoints.Length; i++){
+		// 	population += (weights[i]/totalWeight)*populationPoints[i].population;
+		// }
+		// return population;
 	}
 	void SpawnFish(){
 		(Vector2,SpawnGroup) spawn = GetValidSpawn();
 		if(spawn.Item2 == null){//No valid positions found
+			spawnCooldown = 1;
 			return;
 		}
 		Transform[] groupFish = spawn.Item2.SpawnAt(spawn.Item1);
@@ -84,7 +105,7 @@ public class FishSpawnManager : MonoBehaviour
 				return (spawnPos,group);
 			}
 			iter++;
-			if(iter > 9999){
+			if(iter > 999){
 				Debug.LogWarning("FishSpawn iteration count exceeded maximum!");
 				break;
 			}

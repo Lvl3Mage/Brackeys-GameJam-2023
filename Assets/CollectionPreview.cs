@@ -10,6 +10,7 @@ public class CollectionPreview : MonoBehaviour
 	PhotoGroup photoGroup;
 	public void SetGroup(PhotoGroup _photoGroup){
 		photoGroup = _photoGroup;
+		image.material = Instantiate(image.material);
 		image.material.SetTexture("_MainTex", photoGroup.bestPhoto.texture);
 		nameDisplay.Set(photoGroup.type.name);
 	}

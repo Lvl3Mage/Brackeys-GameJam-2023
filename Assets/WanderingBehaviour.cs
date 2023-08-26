@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
+
 
 [System.Serializable]
 public class NoiseSampler
@@ -14,6 +16,10 @@ public class NoiseSampler
 		Vector2 noiseCoords = position/noiseScale + scrollSpeed*Time.time +seed;
 		float val = MathUtils.TransformRange(Mathf.PerlinNoise(noiseCoords.x, noiseCoords.y),0,1,minValue,maxValue);
 		return val;
+	}
+	[ContextMenu("RandomizeSeed")]
+	public void RandomizeSeed(){
+		seed = new Vector2(Random.Range(-1000f,1000f),Random.Range(-1000f,1000f));
 	}
 }
 public class WanderingBehaviour : FishBehaviour
