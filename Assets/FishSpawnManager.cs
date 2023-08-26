@@ -7,7 +7,6 @@ public class FishSpawnManager : MonoBehaviour
 
 	[SerializeField] bool autoSetSpawnRegions = true;
 	[SerializeField] SpawnRegion[] spawnRegions;
-	[SerializeField] float unloadDistanceFromRegion = 35;
 	[SerializeField] float minUnloadDistanceFromPlayer = 20;
 	List<Transform> spawnedFish = new List<Transform>();
 
@@ -88,7 +87,7 @@ public class FishSpawnManager : MonoBehaviour
 			Transform fish = spawnedFish[i];
 			float regionDistSqr = ((Vector2)fish.position - regionPos).sqrMagnitude;
 			float playerDistSqr = ((Vector2)fish.position - playerPos).sqrMagnitude;
-			if(regionDistSqr > unloadDistanceFromRegion*unloadDistanceFromRegion && playerDistSqr > minUnloadDistanceFromPlayer * minUnloadDistanceFromPlayer){
+			if(regionDistSqr > region.unloadDistance*region.unloadDistance && playerDistSqr > minUnloadDistanceFromPlayer * minUnloadDistanceFromPlayer){
 				Destroy(fish.gameObject);
 				spawnedFish.RemoveAt(i);
 			}
@@ -105,5 +104,11 @@ public class FishSpawnManager : MonoBehaviour
 			}
 		}
 		return minDistRegion;
+	}
+	void OnDrawGizmos(){
+		if(!PlayerInfo.isInitialized()){return;}
+		Gizmos.color = Color.yellow;
+		Vector2 chosenRegion = GetSpawnRegionAt(PlayerInfo.GetPlayerPosition()).transform.position;
+		Gizmos.DrawSphere(chosenRegion, 3f);
 	}
 }

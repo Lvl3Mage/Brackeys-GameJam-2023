@@ -9,6 +9,9 @@ public class SpawnRegion : MonoBehaviour
 	[SerializeField] float maxSpawnDistance;
 	[SerializeField] float minSpawnDistance = 0;
 	[SerializeField] float maxSpawnHeight = 0;
+	[SerializeField] float unloadDistanceFromRegion = 35;
+	[SerializeField] bool debug;
+	public float unloadDistance {get {return unloadDistanceFromRegion;}}
 	public float population {get{return fishPopulation;}}
 	public Transform[] Spawn(){
 		(Vector2,SpawnGroup) spawn = GetValidSpawn();
@@ -57,9 +60,13 @@ public class SpawnRegion : MonoBehaviour
 		return pos;
 	}
 	void OnDrawGizmos(){
+		if(!debug){return;}
 		Gizmos.color = new Color(0,0,1,0.3f);
 		Gizmos.DrawSphere(transform.position, maxSpawnDistance);
 		Gizmos.DrawSphere(transform.position, minSpawnDistance);
+
+		Gizmos.color = new Color(1,0,0,0.3f); 
+		Gizmos.DrawSphere(transform.position, unloadDistanceFromRegion);
 	}
 }
 [System.Serializable]
@@ -80,7 +87,7 @@ public class SpawnGroup
 		Vector2 camPos = (Vector2)cam.transform.position;
 		Vector2 camSize = new Vector2(cam.orthographicSize*2*cam.aspect, cam.orthographicSize*2);
 		float camRectDistance = RectangleSDF(position, camSize, camPos);
-		bool outsideCamera = camRectDistance > minCameraDistance;
+		bool outsideCamera = camRectDistance > minCameraDistance || Time.time < 0.5f;
 
 		Collider2D col = Physics2D.OverlapCircle(position, maxSpawnDistance, obstacleMask);
 		bool outsideObstacles = col == null;

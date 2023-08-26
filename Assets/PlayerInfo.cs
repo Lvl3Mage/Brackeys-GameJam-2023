@@ -84,4 +84,7 @@ public class PlayerInfo : MonoBehaviour
 	public static float GetMaxVelocityMagnitude(){
 		return instance.maxVelocityMagnitude;
 	}
+	public static bool isInitialized(){
+		return instance != null;
+	}
 }
