@@ -7,6 +7,7 @@ public class CameraLerper : MonoBehaviour
 {
     public Transform target;
     [SerializeField] float lerpSpeed = 1f;
+    [SerializeField] private AudioSource uiSounds;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,5 +32,6 @@ public class CameraLerper : MonoBehaviour
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+        uiSounds.Play();
     }
 }
