@@ -9,8 +9,8 @@ public class PoppupController : MonoBehaviour
 	void FadoutOver(){
 		Destroy(gameObject);
 	}
-	public void SetMoney(float money){
-		display.Set(money.ToString("0.00"));
+	public void SetText(string text){
+		display.Set(text);
 	}
 	void Start()
 	{

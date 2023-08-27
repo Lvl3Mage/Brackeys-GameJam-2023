@@ -54,6 +54,9 @@ public class ShopManager : MonoBehaviour
 		if(!shopAccessible && shopOpen){
 			ToggleShop(false);
 		}
+		if(shopOpen & Input.GetKeyDown(KeyCode.Escape)){
+			ToggleShop(false);
+		}
 	}
 	public void Open()
 	{

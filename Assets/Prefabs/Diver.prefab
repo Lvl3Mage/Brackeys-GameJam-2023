@@ -699,7 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc42ade65e113eb4c86a19c250d8d3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oxygenSurfaceRechargeRate: 15
+  oxygenSurfaceRechargeRate: 0.75
   gracePeriodSurfaceRechargeRate: 5
   surfaceDepth: -1
   slider: {fileID: 356010608020530637}
@@ -707,6 +707,7 @@ MonoBehaviour:
   gracePeriodLength: 5
   drowningStart: 1
   drowningEnd: 0.3
+  oxygenPoppup: {fileID: 8649009174705477258, guid: dfb294ca07b70ca4da25e817c3676ee9, type: 3}
 --- !u!1 &450668990137624725
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class OxygenController : MonoBehaviour
 	[SerializeField] Volume drowningVolume;
 	[SerializeField] float gracePeriodLength;
 	[SerializeField] [Range(0,1)] float drowningStart, drowningEnd;
+	[SerializeField] PoppupController oxygenPoppup;
 	float oxygenTime;
 	void Start()
 	{
@@ -19,19 +20,24 @@ public class OxygenController : MonoBehaviour
 	}
 
 	float gracePeriodLeft;
+	bool halfO2Notif = false;
+	bool quarterO2Notif = false;
+	bool noO2Notif = false;
 	void Update()
 	{
 		if(gracePeriodLeft <= 0){
-			Debug.Log("You ded");
+			GameManager.ToggleGameOver();
 			return;
 		}
 		if(PlayerInfo.GetPlayerPosition().y > surfaceDepth){
-			oxygenTime += oxygenSurfaceRechargeRate*Time.deltaTime;
+			oxygenTime += oxygenSurfaceRechargeRate*Time.deltaTime*ShopManager.instance.oxygenDuration.value;
 			gracePeriodLeft += gracePeriodSurfaceRechargeRate*Time.deltaTime;
+			ReloadWarnings();
 		}
 		else{
 			oxygenTime -= Time.deltaTime;
 		}
+		DisplayWarnings();
 		if(oxygenTime <= 0){
 			gracePeriodLeft -= Time.deltaTime;
 		}
@@ -45,5 +51,33 @@ public class OxygenController : MonoBehaviour
 
 		
 		
+	}
+	void DisplayWarnings(){
+		float oxygenPercentage = oxygenTime / ShopManager.instance.oxygenDuration.value;
+		if(oxygenPercentage <= 0.5f && !halfO2Notif){
+			Instantiate(oxygenPoppup, transform.position, Quaternion.identity).SetText("50%");
+			halfO2Notif = true;
+		}
+		if(oxygenPercentage <= 0.25f && !quarterO2Notif){
+			NotificationManager.instance.AddNotification("Low Oxygen", () => {return oxygenTime / ShopManager.instance.oxygenDuration.value > 0.25f;});
+			Instantiate(oxygenPoppup, transform.position, Quaternion.identity).SetText("25%");
+			quarterO2Notif = true;
+		}
+		if(oxygenPercentage <= 0f && !noO2Notif){
+			Instantiate(oxygenPoppup, transform.position, Quaternion.identity).SetText("no");
+			noO2Notif = true;
+		}
+	}
+	void ReloadWarnings(){
+		float oxygenPercentage = oxygenTime / ShopManager.instance.oxygenDuration.value;
+		if(oxygenPercentage >= 0.5f && halfO2Notif){
+			halfO2Notif = false;
+		}
+		if(oxygenPercentage >= 0.25f && quarterO2Notif){
+			quarterO2Notif = false;
+		}
+		if(oxygenPercentage >= 0f && noO2Notif){
+			noO2Notif = false;
+		}
 	}
 }

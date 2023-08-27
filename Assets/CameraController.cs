@@ -22,7 +22,9 @@ public class CameraController : MonoBehaviour
 
 	//Cam controlling
 	void FixedUpdate(){
-
+		if(GameManager.isUIOpen()){
+			return;
+		}
 		// Calclulating Average point
 		Vector2 targetPosition = Vector2.zero;
 		for (int i = 0; i < cameraConfig.trackedObjects.Length; i++){

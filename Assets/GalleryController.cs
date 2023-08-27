@@ -21,6 +21,9 @@ public class GalleryController : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Q)){
 			ToggleWindow(!open);
 		}
+		if(open & Input.GetKeyDown(KeyCode.Escape)){
+			ToggleWindow(false);
+		}
 	}
 	void ToggleWindow(bool value){
 		if(value && GameManager.isUIOpen()){

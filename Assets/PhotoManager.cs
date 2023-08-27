@@ -51,7 +51,7 @@ public class PhotoManager : MonoBehaviour
 				float gain = library.AddPhoto(photo);
 				ShopManager.instance.AddMoney(gain);
 				if(gain > 0){
-					Instantiate(poppup, targets[i].transform.position, Quaternion.identity).SetMoney(gain);
+					Instantiate(poppup, targets[i].transform.position, Quaternion.identity).SetText(gain.ToString("0.00"));
 				}
 				target.DisableTarget();
 			}

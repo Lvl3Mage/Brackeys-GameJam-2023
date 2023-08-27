@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
+	[SerializeField] GameOverMenu gameOverMenu; 
 	void Awake()
 	{
 		if(instance != null){
@@ -20,8 +21,7 @@ public class GameManager : MonoBehaviour
 	public static bool isUIOpen(){
 		return instance.UIOpen;
 	}
-	void Update()
-	{
-		
+	public static void ToggleGameOver(){
+		instance.gameOverMenu.OpenMenu();
 	}
 }
