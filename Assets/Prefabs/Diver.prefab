@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 469342844292865868}
   - component: {fileID: 1661813227046897412}
+  - component: {fileID: 659399852197732558}
   m_Layer: 6
   m_Name: Headlight
   m_TagString: Untagged
@@ -24,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166735966671273154}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.093, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 450668990035268739}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &1661813227046897412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,21 +46,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
+  m_FalloffIntensity: 0.603
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.4
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
+  m_ShadowIntensity: 0.5
   m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 70
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 5
+  m_PointLightInnerAngle: 35
+  m_PointLightOuterAngle: 150
+  m_PointLightInnerRadius: 3
+  m_PointLightOuterRadius: 10
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -72,6 +73,20 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &659399852197732558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166735966671273154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6932625cf94e14896a126cbdb8c887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light: {fileID: 1661813227046897412}
+  intensityMultiplier: 0.5
 --- !u!1 &269463014309578967
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +474,7 @@ MonoBehaviour:
   - {x: -0.35888243, y: 0.008014191, z: 0.00000011920929}
   m_ShapePathHash: 1574414709
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128748
+  m_InstanceId: -807992
 --- !u!1 &450668990035268859
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +611,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.29012537, y: -0.11311436}
-  m_ConnectedAnchor: {x: 0.17111938, y: 0.03965478}
+  m_ConnectedAnchor: {x: 0.1711185, y: 0.039655156}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -830,7 +845,7 @@ SpringJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.0029997826, y: -0.063}
+  m_ConnectedAnchor: {x: -0.0030059814, y: -0.062999964}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0.1
@@ -862,7 +877,7 @@ MonoBehaviour:
   - {x: -0.1403389, y: -0.09986244, z: 0.00000011920929}
   m_ShapePathHash: 715725433
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128784
+  m_InstanceId: -808220
 --- !u!1 &450668990222929339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,7 +1094,7 @@ SpringJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.059000015, y: 0.039}
+  m_ConnectedAnchor: {x: -0.059005737, y: 0.039000034}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0.1
@@ -1111,7 +1126,7 @@ MonoBehaviour:
   - {x: -0.13520098, y: 0.016985014, z: 0}
   m_ShapePathHash: 286882417
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128804
+  m_InstanceId: -808202
 --- !u!1 &450668990471237316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,7 +1251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 450668990471237321}
   bodyRB: {fileID: 450668990035268736}
-  maxForce: 250
+  maxForce: 350
   maxForceDistance: 1
 --- !u!114 &6331047195780490492
 MonoBehaviour:
@@ -1435,7 +1450,7 @@ MonoBehaviour:
   - {x: -0.3149333, y: -0.018684223, z: 0.00000011920929}
   m_ShapePathHash: -605832987
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128826
+  m_InstanceId: -808184
 --- !u!1 &450668990632518270
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,7 +2080,7 @@ MonoBehaviour:
   - {x: -0.27822423, y: -0.0014058352, z: 0}
   m_ShapePathHash: 1812150805
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128888
+  m_InstanceId: -808280
 --- !u!1 &450668991022211868
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,7 +2361,7 @@ MonoBehaviour:
   - {x: -0.22705078, y: 0.10281094, z: 0}
   m_ShapePathHash: 1581832977
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128914
+  m_InstanceId: -808260
 --- !u!1 &450668991100345821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,7 +2590,7 @@ MonoBehaviour:
   - {x: -0.34176064, y: 0.004653856, z: 0.00000011920929}
   m_ShapePathHash: 1654351277
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128934
+  m_InstanceId: -808240
 --- !u!1 &450668991155436943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,7 +2711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 450668991155436947}
   bodyRB: {fileID: 450668990035268736}
-  maxForce: 250
+  maxForce: 350
   maxForceDistance: 1
 --- !u!1 &450668991176305571
 GameObject:
@@ -2809,7 +2824,7 @@ MonoBehaviour:
   - {x: -0.25200844, y: -0.015480548, z: 0}
   m_ShapePathHash: -1059658363
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128958
+  m_InstanceId: -807968
 --- !u!1 &450668991225340553
 GameObject:
   m_ObjectHideFlags: 0
@@ -3412,7 +3427,7 @@ MonoBehaviour:
   - {x: -0.26400965, y: 0.08015061, z: 0.00000011920929}
   m_ShapePathHash: -1588761802
   m_Mesh: {fileID: 0}
-  m_InstanceId: 129010
+  m_InstanceId: -808010
 --- !u!1 &450668991971869234
 GameObject:
   m_ObjectHideFlags: 0
