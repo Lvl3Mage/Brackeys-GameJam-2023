@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
 
 	//Cam controlling
 	void FixedUpdate(){
-		if(GameManager.isUIOpen()){
+		if(GameManager.isUIOpen() || GameManager.isGameWon()){
 			return;
 		}
 		// Calclulating Average point
