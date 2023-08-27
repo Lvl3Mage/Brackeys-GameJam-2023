@@ -927,15 +927,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '* Take photos of the fishies to earn money!
+  m_text: '* Take photos of the fishies to aquire money!
 
-    * Explore the ocean and
-    find rarer fishies for more money!
+    * Don''t let your oxygen
+    run out, go back to the surface to breath.
 
-    * The ocean hides suprises at it''s ends.
+    * The ocean hides suprises at
+    it''s ends.
 
-    *
-    Something lingers in the shadows.'
+    * Something lingers in the shadows.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98dd1b4d9d79b544fb543b2633c26b9f, type: 2}
   m_sharedMaterial: {fileID: -2011482828510166038, guid: 98dd1b4d9d79b544fb543b2633c26b9f, type: 2}
@@ -962,8 +962,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.04
-  m_fontSizeBase: 2.04
+  m_fontSize: 1.7
+  m_fontSizeBase: 1.7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: -0.1
   m_wordSpacing: 0.3
-  m_lineSpacing: 33.72
+  m_lineSpacing: 76
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

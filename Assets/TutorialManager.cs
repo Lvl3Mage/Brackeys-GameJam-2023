@@ -32,7 +32,7 @@ public class TutorialManager : MonoBehaviour
 			yield return null;
 		}
 		Func<bool> ScrollCondition = () => {return Input.mouseScrollDelta.y != 0;};
-		notifs.AddNotification("Use the scrollwheen to switch between inventory items", ScrollCondition);
+		notifs.AddNotification("Use the scroll wheel to switch between inventory items", ScrollCondition);
 		while(!ScrollCondition()){
 			yield return null;
 		}
