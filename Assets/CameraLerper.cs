@@ -19,7 +19,7 @@ public class CameraLerper : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position,target.position,lerpSpeed * Time.deltaTime);
     }
 
-    public void PlayGame(string newScene)
+    public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
