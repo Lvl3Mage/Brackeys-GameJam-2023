@@ -220,14 +220,14 @@ MonoBehaviour:
   fearMaxValue: 4
   fearActiveBonus: 2
   preferenceMultiplier: 2
-  enableSurpriseFear: 0
-  surpriseFearMaxStrength: 0
-  surpriseFearHalfStrengthDistance: 0
-  surpriseFearActivationVelocity: 0
-  surpriseFearActivationSteepness: 0
-  enableApproachFear: 0
-  approachFearStrength: 0
-  approachFearHalfStrengthDistance: 0
+  enableSurpriseFear: 1
+  surpriseFearMaxStrength: 40
+  surpriseFearHalfStrengthDistance: 4
+  surpriseFearActivationVelocity: 3
+  surpriseFearActivationSteepness: 12
+  enableApproachFear: 1
+  approachFearStrength: 2
+  approachFearHalfStrengthDistance: 6
   enableProximityFear: 1
   proximityFearMaxStrength: 8
   proximityFearMinStrength: -8
@@ -382,7 +382,7 @@ MonoBehaviour:
   maxFrequencyVelocity: 7
   maxFrequencyAngularVelocity: 100
   angularVelocityInfluence: 0.5
-  maxFrequency: 8
+  maxFrequency: 5
   initialState: 0
   cycleOffset: 0
   approachSpeed: 200

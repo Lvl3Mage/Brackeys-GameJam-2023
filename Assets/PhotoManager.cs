@@ -117,20 +117,18 @@ public class PhotoLibrary
 	float qualityPerCollection;
 
 	public float EvaluatePhoto(Photo photo){
-		string id = photo.type.id;
-		PhotoCollection collection = GetCollectionWithId(id);
+		PhotoCollection collection = GetCollectionWithType(photo.type);
 		return collection.EvaluatePhoto(photo);
 	}
 	public float AddPhoto(Photo photo){
-		string id = photo.type.id;
-		PhotoCollection collection = GetCollectionWithId(id);
+		PhotoCollection collection = GetCollectionWithType(photo.type);
 		return collection.AddPhoto(photo);
 	}
-	PhotoCollection GetCollectionWithId(string id){
-		if(!library.ContainsKey(id)){
-			library.Add(id,new PhotoCollection(qualityPerCollection));
+	PhotoCollection GetCollectionWithType(PhotoTargetType type){
+		if(!library.ContainsKey(type.id)){
+			library.Add(type.id,new PhotoCollection(type));
 		}
-		return library[id];
+		return library[type.id];
 	}
 	public PhotoGroup[] GetGroups(){
 		List<PhotoGroup> groups = new List<PhotoGroup>();
@@ -142,8 +140,8 @@ public class PhotoLibrary
 	public class PhotoCollection
 	{
 
-		public PhotoCollection(float _remainingQuality){
-			remainingQuality = _remainingQuality;
+		public PhotoCollection(PhotoTargetType type){
+			remainingQuality = type.maxQuality;
 		}
 
 		float remainingQuality;

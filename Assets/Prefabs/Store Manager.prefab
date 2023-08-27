@@ -2408,9 +2408,9 @@ MonoBehaviour:
   photoManagerClose: {fileID: 7367287457724830873}
   cameraStats:
     Value:
-      reach: 8
-      zoom: 1
-      speed: 4
+      reach: 4
+      zoom: 0.3
+      speed: 2
       flashRange: 8
       flashInnerRadius: 0
       flashInnerSize: 10
@@ -2418,63 +2418,85 @@ MonoBehaviour:
       frameSprite: {fileID: 5707218116961789024, guid: 8f097937ef1a6034c836b8c2003f91c3, type: 3}
     upgrades:
     - value:
-        reach: 10
-        zoom: 1.5
-        speed: 5
+        reach: 4
+        zoom: 0.6
+        speed: 4
+        flashRange: 8
+        flashInnerRadius: 0
+        flashInnerSize: 10
+        flashOuterSize: 50
+        frameSprite: {fileID: 5707218116961789024, guid: 8f097937ef1a6034c836b8c2003f91c3, type: 3}
+      cost: 40
+    - value:
+        reach: 6
+        zoom: 0.8
+        speed: 4
+        flashRange: 8
+        flashInnerRadius: 0
+        flashInnerSize: 10
+        flashOuterSize: 50
+        frameSprite: {fileID: 5707218116961789024, guid: 8f097937ef1a6034c836b8c2003f91c3, type: 3}
+      cost: 100
+    - value:
+        reach: 7
+        zoom: 1
+        speed: 4
         flashRange: 12
         flashInnerRadius: 0
         flashInnerSize: 16
         flashOuterSize: 60
         frameSprite: {fileID: 21300000, guid: 2f7415b5c31117f48a81e8ec75242f27, type: 3}
-      cost: 100
+      cost: 300
     - value:
-        reach: 14
-        zoom: 2
-        speed: 7
+        reach: 10
+        zoom: 1.5
+        speed: 5
         flashRange: 16
         flashInnerRadius: 8
-        flashInnerSize: 37
-        flashOuterSize: 68
+        flashInnerSize: 45
+        flashOuterSize: 90
         frameSprite: {fileID: 21300000, guid: 2f7415b5c31117f48a81e8ec75242f27, type: 3}
-      cost: 200
+      cost: 600
   oxygenDuration:
     Value: 30
     upgrades:
-    - value: 60
-      cost: 100
+    - value: 70
+      cost: 150
+    - value: 90
+      cost: 200
     - value: 120
-      cost: 100
-    - value: 240
+      cost: 250
+    - value: 180
       cost: 400
   flashLightStats:
     Value:
-      intensity: 0
+      intensity: 0.2
       innerRadius: 1
       outerRadius: 7
       innerAngle: 15
       outerAngle: 32
     upgrades:
     - value:
-        intensity: 0.2
-        innerRadius: 1
-        outerRadius: 7
-        innerAngle: 15
-        outerAngle: 32
-      cost: 20
-    - value:
         intensity: 0.4
         innerRadius: 3
         outerRadius: 11
         innerAngle: 20
         outerAngle: 32
-      cost: 100
+      cost: 150
     - value:
         intensity: 0.8
         innerRadius: 6
         outerRadius: 18
         innerAngle: 25
-        outerAngle: 36
-      cost: 100
+        outerAngle: 45
+      cost: 300
+    - value:
+        intensity: 1
+        innerRadius: 6
+        outerRadius: 18
+        innerAngle: 40
+        outerAngle: 60
+      cost: 450
 --- !u!1 &6942839798915052417
 GameObject:
   m_ObjectHideFlags: 0

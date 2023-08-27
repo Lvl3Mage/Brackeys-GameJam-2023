@@ -53,7 +53,7 @@ public class TutorialManager : MonoBehaviour
 		while(!ViewPhotoCondition()){
 			yield return null;
 		}
-		Func<bool> GainMoneyCondition = () => {return ShopManager.instance.money >= 20;};
+		Func<bool> GainMoneyCondition = () => {return ShopManager.instance.money >= 50;};
 		notifs.AddNotification("Gather money by taking pictures of fish", GainMoneyCondition);
 		while(!GainMoneyCondition()){
 			yield return null;

@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 1286788335
   Name: Box fish
   Description: 
-  Value: 180
+  Value: 50
+  MaxQuality: 3

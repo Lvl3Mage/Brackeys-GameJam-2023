@@ -25,8 +25,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455470555304158239}
-  m_LocalRotation: {x: 0, y: 0, z: 0.008288211, w: 0.9999657}
-  m_LocalPosition: {x: 1.7751402, y: -0.00000048650236, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0027131482, w: 0.9999963}
+  m_LocalPosition: {x: 1.2804358, y: 0.00000039662544, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6401394326342991859}
@@ -66,9 +66,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13819832, y: -0.009083868}
-  m_Size: {x: 0.306316, y: 0.7376227}
-  m_Direction: 0
+  m_Offset: {x: 0.35, y: -0.0040175263}
+  m_Size: {x: 0.85, y: 0.44686717}
+  m_Direction: 1
 --- !u!1 &3575554870343163091
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,12 +147,12 @@ MonoBehaviour:
   angularAcceleration: 10
   angularSpeed: 1000
   maxAngularSpeed: 300
-  targetAcceleration: 5
-  slowdownStartDistance: 5
+  targetAcceleration: 8
+  slowdownStartDistance: 1
   slowdownEndDistance: 0
-  maxSpeed: 4
+  maxSpeed: 12
   minSpeed: 0.5
-  trajectorySharpness: 2
+  trajectorySharpness: 1
   pathBlockingLayers:
     serializedVersion: 2
     m_Bits: 257
@@ -314,8 +314,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.37564266, y: -0.06396725}
-  m_Size: {x: 1.7704388, y: 0.6369526}
+  m_Offset: {x: -0.14, y: -0.06396725}
+  m_Size: {x: 1.43, y: 0.6369526}
   m_Direction: 1
 --- !u!233 &282513506297795554
 HingeJoint2D:
@@ -332,7 +332,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -1.2683136, y: -0.115250945}
-  m_ConnectedAnchor: {x: 0.0021556537, y: -0.0022825734}
+  m_ConnectedAnchor: {x: 0.49690235, y: 0.0004488566}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
   approachSpeed: 200
   approachForce: 500
   slowdownAngle: 5
-  angleRange: {x: -25, y: 25}
+  angleRange: {x: -30, y: 30}
   restingFrequency: 0.4
   restingPose: 0
   restingApproachSpeed: 40

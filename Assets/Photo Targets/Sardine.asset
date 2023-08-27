@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 686775754
   Name: Sardine
   Description: As interesting as dust in an old home
-  Value: 10
+  Value: 15
+  MaxQuality: 6

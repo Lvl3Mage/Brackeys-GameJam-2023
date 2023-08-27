@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 1383282814
   Name: Clown fish
   Description: Not related with that famous movie
-  Value: 130
+  Value: 70
+  MaxQuality: 3

@@ -173,7 +173,7 @@ MonoBehaviour:
   targetAcceleration: 5
   slowdownStartDistance: 5
   slowdownEndDistance: 0
-  maxSpeed: 4
+  maxSpeed: 7
   minSpeed: 0.5
   trajectorySharpness: 2
   pathBlockingLayers:
@@ -184,19 +184,19 @@ MonoBehaviour:
   targetSelectionNoiseX:
     noiseScale: 20
     scrollSpeed: {x: 0.1, y: 0.1}
-    seed: {x: 9.8, y: -19.14}
+    seed: {x: 30.989044, y: 593.0097}
     minValue: -1
     maxValue: 1
   targetSelectionNoiseY:
     noiseScale: 20
     scrollSpeed: {x: 0.1, y: 0.1}
-    seed: {x: 5.65543, y: 47.66}
+    seed: {x: 38.399567, y: 229.75027}
     minValue: -1
     maxValue: 1
   rotationNoise:
     noiseScale: 20
     scrollSpeed: {x: 0.5, y: 0.5}
-    seed: {x: 5.65543, y: 47.66}
+    seed: {x: 883.22424, y: -767.20166}
     minValue: -90
     maxValue: 90
   scanAngleStepSize: 5
@@ -225,9 +225,9 @@ MonoBehaviour:
   surpriseFearHalfStrengthDistance: 0
   surpriseFearActivationVelocity: 0
   surpriseFearActivationSteepness: 0
-  enableApproachFear: 0
-  approachFearStrength: 0
-  approachFearHalfStrengthDistance: 0
+  enableApproachFear: 1
+  approachFearStrength: 8
+  approachFearHalfStrengthDistance: 5
   enableProximityFear: 1
   proximityFearMaxStrength: 8
   proximityFearMinStrength: -8

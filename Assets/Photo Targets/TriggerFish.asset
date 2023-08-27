@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 1242446120
   Name: Trigger fish
   Description: 
-  Value: 110
+  Value: 40
+  MaxQuality: 5

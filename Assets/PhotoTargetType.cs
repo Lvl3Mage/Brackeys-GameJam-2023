@@ -5,6 +5,7 @@ using MyBox;
 [CreateAssetMenu(menuName = "Game/PhotoTargetType")]
 public class PhotoTargetType : ScriptableObject
 {
+
 	[SerializeField] string Id;
 	public string id { get{return Id;}}
 	[SerializeField] string Name;
@@ -13,6 +14,8 @@ public class PhotoTargetType : ScriptableObject
 	public string description { get{return Description;}}
 	[SerializeField] float Value;
 	public float value { get{return Value;}}
+	[SerializeField] float MaxQuality = 3;
+	public float maxQuality { get{return MaxQuality;}}
 	[ButtonMethod]
 	void NameToId(){
 		Id = Name;

@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 520873074
   Name: Parrot Fish
   Description: 
-  Value: 170
+  Value: 90
+  MaxQuality: 5

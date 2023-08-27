@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 1008847606
   Name: Butterfly fish
   Description: 
-  Value: 140
+  Value: 80
+  MaxQuality: 5

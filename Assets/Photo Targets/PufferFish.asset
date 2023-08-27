@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 945135378
   Name: Pufferfish
   Description: 
-  Value: 120
+  Value: 50
+  MaxQuality: 7

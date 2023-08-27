@@ -15,4 +15,5 @@ MonoBehaviour:
   Id: 1560706066
   Name: Blue tang
   Description: 
-  Value: 160
+  Value: 80
+  MaxQuality: 5
