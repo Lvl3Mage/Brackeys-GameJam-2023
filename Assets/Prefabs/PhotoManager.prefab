@@ -50,7 +50,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   cameraFrame: {fileID: 8733816260160271310}
+  poppup: {fileID: 6126906676489084171, guid: 832e5edc0a4854b40a7c02bb5aae713c, type: 3}
 --- !u!114 &8733816260484259922
 MonoBehaviour:
   m_ObjectHideFlags: 0

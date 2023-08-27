@@ -5,6 +5,7 @@ using UnityEngine;
 public class PhotoTarget : MonoBehaviour
 {
 	[SerializeField] PhotoTargetType type;
+	bool active = true;
 	void Start()
 	{
 		
@@ -14,6 +15,12 @@ public class PhotoTarget : MonoBehaviour
 	void Update()
 	{
 		
+	}
+	public void DisableTarget(){
+		active = false;
+	}
+	public bool isActive(){
+		return active;
 	}
 	public PhotoTargetType GetType(){
 		return type;

@@ -37,6 +37,8 @@ public struct PhotoCameraConfig
 	public float zoom;
 	public float speed;
 	public float flashRange;
-	public float flashSize;
+	public float flashInnerRadius;
+	public float flashInnerSize;
+	public float flashOuterSize;
 	public Sprite frameSprite;
 }

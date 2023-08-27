@@ -43,6 +43,7 @@ public class ShopManager : MonoBehaviour
 		money = startingMoney;
 		UpdateAll();
 	}
+
 	bool shopOpen = false;
 	void Update(){
 		bool shopAccessible = PlayerInfo.GetPlayerPosition().y > accessibleDepth;
@@ -100,6 +101,10 @@ public class ShopManager : MonoBehaviour
 		moneyDisplay.Set(money.ToString("0.00"));
 	}
 	void ToggleShop(bool value){
+		if(value && GameManager.isUIOpen()){
+			return;
+		}
+		GameManager.ToggleUI(value);
 		shopOpen = value;
 		shopManagerPanel.alpha = value ? 1 : 0;
 		shopManagerPanel.interactable = value;
@@ -136,6 +141,9 @@ public class UpgradableField<T>
 	}
 	public bool UpgradesLeft(){
 		return upgradeIndex < upgrades.Length;
+	}
+	public int UpgradeLevel(){
+		return upgradeIndex;
 	}
 	[System.Serializable]
 	public struct Upgrade{

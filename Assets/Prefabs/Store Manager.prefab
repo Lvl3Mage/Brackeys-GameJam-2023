@@ -2411,50 +2411,69 @@ MonoBehaviour:
       reach: 8
       zoom: 1
       speed: 4
-      flashRange: 0
-      flashSize: 2
+      flashRange: 8
+      flashInnerRadius: 0
+      flashInnerSize: 10
+      flashOuterSize: 50
       frameSprite: {fileID: 5707218116961789024, guid: 8f097937ef1a6034c836b8c2003f91c3, type: 3}
     upgrades:
     - value:
         reach: 10
         zoom: 1.5
         speed: 5
-        flashRange: 0
-        flashSize: 4
+        flashRange: 12
+        flashInnerRadius: 0
+        flashInnerSize: 16
+        flashOuterSize: 60
         frameSprite: {fileID: 21300000, guid: 2f7415b5c31117f48a81e8ec75242f27, type: 3}
       cost: 100
     - value:
         reach: 14
         zoom: 2
         speed: 7
-        flashRange: 0
-        flashSize: 5
+        flashRange: 16
+        flashInnerRadius: 8
+        flashInnerSize: 37
+        flashOuterSize: 68
         frameSprite: {fileID: 21300000, guid: 2f7415b5c31117f48a81e8ec75242f27, type: 3}
       cost: 200
   oxygenDuration:
-    Value: 5
+    Value: 30
     upgrades:
     - value: 60
-      cost: 200
+      cost: 100
     - value: 120
-      cost: 200
+      cost: 100
     - value: 240
       cost: 400
   flashLightStats:
     Value:
-      reach: 3
-      intensity: 0.1
-      size: 2
+      intensity: 0
+      innerRadius: 1
+      outerRadius: 7
+      innerAngle: 15
+      outerAngle: 32
     upgrades:
     - value:
-        reach: 6
+        intensity: 0.2
+        innerRadius: 1
+        outerRadius: 7
+        innerAngle: 15
+        outerAngle: 32
+      cost: 20
+    - value:
         intensity: 0.4
-        size: 4
+        innerRadius: 3
+        outerRadius: 11
+        innerAngle: 20
+        outerAngle: 32
       cost: 100
     - value:
-        reach: 9
         intensity: 0.8
-        size: 6
+        innerRadius: 6
+        outerRadius: 18
+        innerAngle: 25
+        outerAngle: 36
       cost: 100
 --- !u!1 &6942839798915052417
 GameObject:
@@ -2592,9 +2611,9 @@ RectTransform:
   m_Father: {fileID: 6942839799486802516}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -237.5, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -237.5, y: -25}
   m_SizeDelta: {x: 475, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6942839799019091226

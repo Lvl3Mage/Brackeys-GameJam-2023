@@ -25,15 +25,19 @@ public class FlashlightItem : InventoryItem
 
 		FlashlightConfig stats = ShopManager.instance.flashLightStats.value;
 
-		light.transform.localScale = new Vector3(stats.reach,stats.size,light.transform.transform.localScale.z);
-		light.transform.localPosition = new Vector3(-stats.reach,light.transform.localPosition.y,light.transform.localPosition.z);
 		light.intensity = stats.intensity;
+		light.pointLightOuterAngle = stats.outerAngle;
+		light.pointLightInnerAngle = stats.innerAngle;
+		light.pointLightOuterRadius = stats.outerRadius;
+		light.pointLightInnerRadius = stats.innerRadius;
 	}
 }
 [System.Serializable]
 public struct FlashlightConfig
 {
-	public float reach;
 	public float intensity;
-	public float size;
+	public float innerRadius;
+	public float outerRadius;
+	public float innerAngle;
+	public float outerAngle;
 }

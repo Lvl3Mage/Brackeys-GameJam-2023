@@ -12,6 +12,7 @@ public class PhotoManager : MonoBehaviour
 	PhotoLibrary library;
 	[SerializeField] LayerMask photoTargetLayers;
 	[SerializeField] GameObject cameraFrame;
+	[SerializeField] PoppupController poppup;
 	void Awake()
 	{
 		if(instance != null){
@@ -42,9 +43,17 @@ public class PhotoManager : MonoBehaviour
 			for(int i = 0; i < targets.Length; i++){
 				photos[i] = new Photo(targets[i], cameraPosition, rt);
 			}
-			foreach(Photo photo in photos){
+			for(int i = 0; i < photos.Length; i++){
+				PhotoTarget target = targets[i];
+				if(!target.isActive()){continue;}
+
+				Photo photo = photos[i];
 				float gain = library.AddPhoto(photo);
 				ShopManager.instance.AddMoney(gain);
+				if(gain > 0){
+					Instantiate(poppup, targets[i].transform.position, Quaternion.identity).SetMoney(gain);
+				}
+				target.DisableTarget();
 			}
 
 			// Photo bestPhoto = BestPhotoOfTargets(targets, camera.transform.position, rt);

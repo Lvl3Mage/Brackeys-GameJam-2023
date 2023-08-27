@@ -20,7 +20,7 @@ public class CameraItem : InventoryItem
 	void Update(){
 		cooldownLeft -= Time.deltaTime;
 		cooldownLeft = Mathf.Max(cooldownLeft,0);
-
+		if(GameManager.isUIOpen()){return;}
 		if(!equipped){return;}
 		if(Input.GetMouseButtonDown(0) && cooldownLeft <= 0){
 			StartCoroutine(TakePhoto());

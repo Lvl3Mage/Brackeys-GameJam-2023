@@ -23,6 +23,12 @@ public class GalleryController : MonoBehaviour
 		}
 	}
 	void ToggleWindow(bool value){
+		if(value && GameManager.isUIOpen()){
+			return;
+		}
+		GameManager.ToggleUI(value);
+
+		
 		if(value){
 			LoadPreviews();
 		}
