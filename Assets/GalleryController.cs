@@ -8,6 +8,8 @@ public class GalleryController : MonoBehaviour
 	[SerializeField] GameObject noPreviewsPrefab;
 	[SerializeField] Transform previewContainer;
 	[SerializeField] CanvasGroup canvasGroup;
+	[SerializeField] AudioSource photoManagerOpen;
+	[SerializeField] AudioSource photoManagerClose;
 	void Start()
 	{
 		
@@ -28,6 +30,9 @@ public class GalleryController : MonoBehaviour
 		canvasGroup.alpha = value ? 1 : 0;
 		canvasGroup.interactable = value;
 		canvasGroup.blocksRaycasts = value;
+		if (value){ photoManagerOpen.Play(); }
+		else { photoManagerClose.Play(); }
+
 	}
 	void LoadPreviews(){
 		foreach(Transform child in previewContainer) {

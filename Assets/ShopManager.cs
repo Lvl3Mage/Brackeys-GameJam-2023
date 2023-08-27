@@ -32,12 +32,14 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] TextWriter oxygenCostDisplay;
 	[SerializeField] Button flashUpgradeButton;
 	[SerializeField] TextWriter flashCostDisplay;
+	[SerializeField] AudioSource photoManagerOpen;
+	[SerializeField] AudioSource photoManagerClose;
 	public UpgradableField<PhotoCameraConfig> cameraStats;
 	public UpgradableField<float> oxygenDuration;
 	public UpgradableField<FlashlightConfig> flashLightStats;
 	void Start()
 	{
-		ToggleShop(false);
+		//ToggleShop(false);
 		money = startingMoney;
 		UpdateAll();
 	}
@@ -102,6 +104,8 @@ public class ShopManager : MonoBehaviour
 		shopManagerPanel.alpha = value ? 1 : 0;
 		shopManagerPanel.interactable = value;
 		shopManagerPanel.blocksRaycasts = value;
+		if (value){ photoManagerOpen.Play(); }
+		else { photoManagerClose.Play(); }
 	}
 }
 [System.Serializable]
