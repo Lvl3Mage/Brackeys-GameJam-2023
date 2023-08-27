@@ -44,7 +44,7 @@ public class TutorialManager : MonoBehaviour
 		}
 
 		Func<bool> FishPhotoCondition = () => {return PhotoManager.instance.GetGroups().Length > 0;};
-		notifs.AddNotification("Use your camera to take a photo of a fish", FishPhotoCondition);
+		notifs.AddNotification("Use your camera to take a photo of a jellyfish", FishPhotoCondition);
 		while(!FishPhotoCondition()){
 			yield return null;
 		}
@@ -54,12 +54,12 @@ public class TutorialManager : MonoBehaviour
 			yield return null;
 		}
 		Func<bool> GainMoneyCondition = () => {return ShopManager.instance.money >= 50;};
-		notifs.AddNotification("Gather money by taking pictures of fish", GainMoneyCondition);
+		notifs.AddNotification("Gather money by taking pictures of jellyfish", GainMoneyCondition);
 		while(!GainMoneyCondition()){
 			yield return null;
 		}
-		Func<bool> UpgradeGearCondition = () => {return ShopManager.instance.cameraStats.UpgradeLevel() != 0 || ShopManager.instance.oxygenDuration.UpgradeLevel() != 0 || ShopManager.instance.flashLightStats.UpgradeLevel() != 0;};
-		notifs.AddNotification("Get an upgrade at the shop on the surface", UpgradeGearCondition);
+		Func<bool> UpgradeGearCondition = () => {return ShopManager.instance.cameraStats.UpgradeLevel() != 0;};
+		notifs.AddNotification("Upgrade your camera at the shop on the surface", UpgradeGearCondition);
 		while(!UpgradeGearCondition()){
 			yield return null;
 		}
