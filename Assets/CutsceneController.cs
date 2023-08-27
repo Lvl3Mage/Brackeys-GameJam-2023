@@ -7,6 +7,7 @@ public class CutsceneController : MonoBehaviour
  	[SerializeField] Joint2D grabJoint;
  	[SerializeField] Rigidbody2D playerRB;
  	[SerializeField] Animator animator;
+ 	[SerializeField] AudioSource ass;
 	void Start()
 	{
 		
@@ -27,6 +28,7 @@ public class CutsceneController : MonoBehaviour
 		
 	}
 	void Cutscene(){
+		ass.Play();
 		GameManager.ToggleGameWon();
 		transform.position = PlayerInfo.GetPlayerPosition();
 		animator.SetTrigger("StartCutscene");

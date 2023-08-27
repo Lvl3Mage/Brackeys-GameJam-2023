@@ -719,7 +719,7 @@ MonoBehaviour:
   surfaceDepth: -1
   slider: {fileID: 356010608020530637}
   drowningVolume: {fileID: 0}
-  gracePeriodLength: 5
+  gracePeriodLength: 7
   drowningStart: 1
   drowningEnd: 0.3
   oxygenPoppup: {fileID: 8649009174705477258, guid: dfb294ca07b70ca4da25e817c3676ee9, type: 3}
