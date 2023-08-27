@@ -252,9 +252,9 @@ MonoBehaviour:
   surpriseFearHalfStrengthDistance: 0.75
   surpriseFearActivationVelocity: 5
   surpriseFearActivationSteepness: 35
-  enableApproachFear: 0
-  approachFearStrength: 0
-  approachFearHalfStrengthDistance: 0
+  enableApproachFear: 1
+  approachFearStrength: 1.03
+  approachFearHalfStrengthDistance: 2.07
   enableProximityFear: 0
   proximityFearMaxStrength: 8
   proximityFearMinStrength: -8

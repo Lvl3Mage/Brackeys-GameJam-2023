@@ -242,9 +242,9 @@ MonoBehaviour:
   approachFearStrength: 0
   approachFearHalfStrengthDistance: 0
   enableProximityFear: 1
-  proximityFearMaxStrength: 8
+  proximityFearMaxStrength: 10.46
   proximityFearMinStrength: -8
-  proximityFearHalfStrengthDistance: 3
+  proximityFearHalfStrengthDistance: 5.55
   fearLevel: 0
   angularSpeed: 1600
   maxAngularSpeed: 600
