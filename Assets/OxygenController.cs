@@ -8,6 +8,7 @@ public class OxygenController : MonoBehaviour
 	[SerializeField] float gracePeriodSurfaceRechargeRate = 5;
 	[SerializeField] float surfaceDepth;
 	[SerializeField] SliderController slider;
+	[SerializeField] SliderController slider2;
 	[SerializeField] Volume drowningVolume;
 	[SerializeField] float gracePeriodLength;
 	[SerializeField] [Range(0,1)] float drowningStart, drowningEnd;
@@ -45,6 +46,8 @@ public class OxygenController : MonoBehaviour
 		oxygenTime = Mathf.Clamp(oxygenTime,0,ShopManager.instance.oxygenDuration.value);
 		slider.SetValue(oxygenTime);
 		slider.SetRange(0,ShopManager.instance.oxygenDuration.value);
+		slider2.SetValue(oxygenTime);
+		slider2.SetRange(0,ShopManager.instance.oxygenDuration.value);
 
 
 		drowningVolume.weight = Mathf.Clamp01(MathUtils.TransformRange(gracePeriodLeft/gracePeriodLength, drowningStart, drowningEnd, 0, 1));

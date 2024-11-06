@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 public class TutorialManager : MonoBehaviour
 {
+	[SerializeField] bool forceTutorial;
 	void OnTutorialComplete(){
 		PlayerPrefs.SetInt("tutorialComplete",1);
 		PlayerPrefs.Save();
@@ -12,7 +13,7 @@ public class TutorialManager : MonoBehaviour
 	void Start()
 	{
 		if(PlayerPrefs.HasKey("tutorialComplete")){
-			if(PlayerPrefs.GetInt("tutorialComplete") == 1){
+			if(PlayerPrefs.GetInt("tutorialComplete") == 1 && !forceTutorial){
 				return;
 			}
 		}
@@ -73,11 +74,5 @@ public class TutorialManager : MonoBehaviour
 			yield return null;
 		}
 		OnTutorialComplete();
-	}
-
-
-	void Update()
-	{
-		
 	}
 }

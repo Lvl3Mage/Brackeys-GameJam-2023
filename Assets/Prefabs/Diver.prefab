@@ -716,7 +716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oxygenSurfaceRechargeRate: 0.75
   gracePeriodSurfaceRechargeRate: 5
-  surfaceDepth: -1
+  surfaceDepth: -2.5
   slider: {fileID: 356010608020530637}
   drowningVolume: {fileID: 0}
   gracePeriodLength: 7

@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346f8579b7458eb469de55a3d01beeb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 0
+  startingMoney: 50
   shopManagerPanel: {fileID: 6942839798385050716}
   shopNotification: {fileID: 6942839799486802512}
   accessibleDepth: -2

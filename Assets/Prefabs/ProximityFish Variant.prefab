@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5149075830047369377, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.016725246
+      objectReference: {fileID: 0}
+    - target: {fileID: 5149075830047369377, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.009534768
+      objectReference: {fileID: 0}
     - target: {fileID: 8430858984207706000, guid: 80cfce9f087b9b54f9193d5154db043a, type: 3}
       propertyPath: m_Name
       value: ProximityFish Variant
